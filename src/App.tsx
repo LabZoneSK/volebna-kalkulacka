@@ -1,6 +1,5 @@
-import { useState } from "react";
 import UserAnswers from "./components/AnswersForm/AnswersForm";
-import { Question } from "./components/AnswersForm/AnswersForm";
+import { Question, PoliticalParty } from "./@types";
 import "./App.css";
 
 const questionsStub: Question[] = [
@@ -17,15 +16,6 @@ const questionsStub: Question[] = [
     text: "Podporujem EU a jej rozsirovanie",
   },
 ];
-
-export interface PoliticalParty {
-  party_id: string;
-  party_name: string;
-  answers: {
-    question_id: string;
-    answer_value: number;
-  }[];
-}
 
 const politicalPartiesStub: PoliticalParty[] = [
   {

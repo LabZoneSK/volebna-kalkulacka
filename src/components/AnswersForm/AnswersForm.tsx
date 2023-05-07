@@ -1,15 +1,5 @@
 import React, { useState } from "react";
-import { PoliticalParty } from "../../App";
-
-interface Question {
-  question_id: string;
-  text: string;
-}
-
-interface UserAnswersProps {
-  questions: Question[];
-  politicalParties: PoliticalParty[];
-}
+import { UserAnswersProps } from "../../@types";
 
 const UserAnswers: React.FC<UserAnswersProps> = ({
   questions,
