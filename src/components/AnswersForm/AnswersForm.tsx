@@ -61,7 +61,7 @@ const UserAnswers: React.FC<UserAnswersProps> = ({
 
     const matches = questions
       .filter(
-        (question, index) =>
+        (_, index) =>
           answers[index] !== 0 &&
           answers[index] === bestMatchParty.answers[index]
       )
