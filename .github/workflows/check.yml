@@ -95,7 +95,7 @@ jobs:
         run: yarn build
 
       - name: Start
-        run: yarn dev & npx wait-on --timeout 30000 http://localhost:3000
+        run: yarn dev & npx wait-on --timeout 30000 http://127.0.0.1:3000
 
       - name: Cypress run
         uses: cypress-io/github-action@v3
