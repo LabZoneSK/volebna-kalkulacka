@@ -1,15 +1,5 @@
 import React, { useState } from "react";
-import { PoliticalParty } from "../../@types";
-
-interface Question {
-  question_id: string;
-  text: string;
-}
-
-interface UserAnswersProps {
-  questions: Question[];
-  politicalParties: PoliticalParty[];
-}
+import { UserAnswersProps } from "../../@types";
 
 const UserAnswers: React.FC<UserAnswersProps> = ({
   questions,
@@ -19,6 +9,7 @@ const UserAnswers: React.FC<UserAnswersProps> = ({
     new Array(questions.length).fill(0)
   );
   const [userMatchParty, setUserMatchParty] = useState<string | null>();
+  const [matchingQuestions, setMatchingQuestions] = useState<string[]>([]);
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -38,8 +29,9 @@ const UserAnswers: React.FC<UserAnswersProps> = ({
 
     userAnswers.forEach((answer, index) => {
       if (answer !== 0) {
-        total += answer === partyAnswers[index] ? 1 : -1;
-        count++;
+        total +=
+          (answer === partyAnswers[index] ? 1 : -1) * questions[index].weight;
+        count += questions[index].weight;
       }
     });
 
@@ -59,6 +51,7 @@ const UserAnswers: React.FC<UserAnswersProps> = ({
         party_id: party.party_id,
         party_name: party.party_name,
         compliance: calculateCompliance(answers, partyAnswers),
+        answers: partyAnswers,
       };
     });
 
@@ -66,12 +59,21 @@ const UserAnswers: React.FC<UserAnswersProps> = ({
       return prev.compliance > current.compliance ? prev : current;
     });
 
+    const matches = questions
+      .filter(
+        (question, index) =>
+          answers[index] !== 0 &&
+          answers[index] === bestMatchParty.answers[index]
+      )
+      .map((question) => question.text);
+
     setUserMatchParty(bestMatchParty.party_name);
+    setMatchingQuestions(matches);
   };
 
   return (
     <div>
-      <h1>Election Calculator</h1>
+      <h1>Volebna kalukacka</h1>
       <form onSubmit={(e) => e.preventDefault()}>
         {questions.map((question, index) => (
           <div key={question.question_id}>
@@ -102,13 +104,34 @@ const UserAnswers: React.FC<UserAnswersProps> = ({
             Neviem
           </div>
         ))}
-        <br />
-        <button type="submit" onClick={handleSubmit}>
-          Submit
-        </button>
+        <div className="buttons">
+          <button type="submit" onClick={handleSubmit}>
+            Vyhodnotit
+          </button>
+          <button
+            type="reset"
+            onClick={() => setAnswers(new Array(questions.length).fill(0))}
+          >
+            Reset
+          </button>
+        </div>
 
         {userMatchParty && (
-          <p>Strana s najviac zhodnymi odpovedami: {userMatchParty}</p>
+          <div>
+            <p>
+              Strana s najviac zhodnymi odpovedami: <b>{userMatchParty}</b>
+            </p>
+            {matchingQuestions.length > 0 && (
+              <div>
+                <p>Otázky, kde sa zhodnes so stranou:</p>
+                <ul>
+                  {matchingQuestions.map((question, index) => (
+                    <li key={index}>{question}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
         )}
       </form>
     </div>

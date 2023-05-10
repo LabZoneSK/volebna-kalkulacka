@@ -1,6 +1,7 @@
 export interface Question {
   question_id: string;
   text: string;
+  weight: number;
 }
 
 export interface UserAnswersProps {
