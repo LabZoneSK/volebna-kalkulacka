@@ -73,7 +73,7 @@ const UserAnswers: React.FC<UserAnswersProps> = ({
 
   return (
     <div>
-      <h1>Volebna kalukacka</h1>
+      <h1>Volebna kalkulacka</h1>
       <form onSubmit={(e) => e.preventDefault()}>
         {questions.map((question, index) => (
           <div key={question.question_id}>
