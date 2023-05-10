@@ -94,11 +94,9 @@ jobs:
       - name: Build
         run: yarn build
 
-      - name: Start
-        run: yarn dev
-
       - name: Cypress run
-        uses: cypress-io/github-action@v3
+        uses: cypress-io/github-action@v5
         with:
           browser: chrome
+          start: yarn vite --host --port 3000
           wait-on: "http://localhost:3000"
