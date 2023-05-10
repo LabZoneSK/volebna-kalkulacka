@@ -8,26 +8,34 @@ const UserAnswers: React.FC<UserAnswersProps> = ({
   const [answers, setAnswers] = useState<number[]>(
     new Array(questions.length).fill(0)
   );
-  const [prefferedParty, setClosestParty] = useState<any>(null);
+  const [userMatchParty, setUserMatchParty] = useState<string | null>();
+  const [matchingQuestions, setMatchingQuestions] = useState<string[]>([]);
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement>,
     index: number
   ) => {
     const newAnswers = [...answers];
-    newAnswers[index] = parseFloat(event.target.value);
+    newAnswers[index] = parseInt(event.target.value);
     setAnswers(newAnswers);
   };
 
-  const calculateEuclideanDistance = (
+  const calculateCompliance = (
     userAnswers: number[],
     partyAnswers: number[]
   ): number => {
-    const squaredDifferences = userAnswers.map((answer, index) => {
-      return Math.pow(answer - partyAnswers[index], 2);
+    let total = 0;
+    let count = 0;
+
+    userAnswers.forEach((answer, index) => {
+      if (answer !== 0) {
+        total +=
+          (answer === partyAnswers[index] ? 1 : -1) * questions[index].weight;
+        count += questions[index].weight;
+      }
     });
 
-    return Math.sqrt(squaredDifferences.reduce((sum, diff) => sum + diff, 0));
+    return (total / count / 2 + 0.5) * 100;
   };
 
   const handleSubmit = () => {
@@ -42,54 +50,90 @@ const UserAnswers: React.FC<UserAnswersProps> = ({
       return {
         party_id: party.party_id,
         party_name: party.party_name,
-        distance: calculateEuclideanDistance(answers, partyAnswers),
+        compliance: calculateCompliance(answers, partyAnswers),
+        answers: partyAnswers,
       };
     });
 
-    const closestParty = distances.reduce((prev, current) => {
-      return prev.distance < current.distance ? prev : current;
+    const bestMatchParty = distances.reduce((prev, current) => {
+      return prev.compliance > current.compliance ? prev : current;
     });
 
-    setClosestParty(closestParty.party_name);
+    const matches = questions
+      .filter(
+        (question, index) =>
+          answers[index] !== 0 &&
+          answers[index] === bestMatchParty.answers[index]
+      )
+      .map((question) => question.text);
+
+    setUserMatchParty(bestMatchParty.party_name);
+    setMatchingQuestions(matches);
   };
 
   return (
     <div>
-      <h1>Volebna kalkulacka</h1>
-      <p>
-        Na kolko sa stotoznujes s tymito vyhlaseniami?
-        <br />
-        0% = absolutne nie
-        <br />
-        50% = nemam nazor
-        <br />
-        100% = absolutne ano
-      </p>
+      <h1>Volebna kalukacka</h1>
       <form onSubmit={(e) => e.preventDefault()}>
         {questions.map((question, index) => (
           <div key={question.question_id}>
             <p>{question.text}</p>
             <input
-              type="range"
-              min="0"
-              max="1"
-              step="0.1"
-              value={answers[index]}
+              type="radio"
+              name={`question_${question.question_id}`}
+              value="1"
+              checked={answers[index] === 1}
               onChange={(e) => handleChange(e, index)}
-            />
-            <span>{(answers[index] * 100).toFixed(0)}%</span>
+            />{" "}
+            Ano
+            <input
+              type="radio"
+              name={`question_${question.question_id}`}
+              value="-1"
+              checked={answers[index] === -1}
+              onChange={(e) => handleChange(e, index)}
+            />{" "}
+            Nie
+            <input
+              type="radio"
+              name={`question_${question.question_id}`}
+              value="0"
+              checked={answers[index] === 0}
+              onChange={(e) => handleChange(e, index)}
+            />{" "}
+            Neviem
           </div>
         ))}
-        <button type="submit" onClick={handleSubmit}>
-          Vyhodnotit
-        </button>
+        <div className="buttons">
+          <button type="submit" onClick={handleSubmit}>
+            Vyhodnotit
+          </button>
+          <button
+            type="reset"
+            onClick={() => setAnswers(new Array(questions.length).fill(0))}
+          >
+            Reset
+          </button>
+        </div>
+
+        {userMatchParty && (
+          <div>
+            <p>
+              Strana s najviac zhodnymi odpovedami: <b>{userMatchParty}</b>
+            </p>
+            {matchingQuestions.length > 0 && (
+              <div>
+                <p>Otázky, kde sa zhodnes so stranou:</p>
+                <ul>
+                  {matchingQuestions.map((question, index) => (
+                    <li key={index}>{question}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        )}
       </form>
-      {prefferedParty?.length > 0 && (
-        <p>
-          Na zaklade tvojich odpovedi, je strana <b>{prefferedParty}</b>{" "}
-          najblizsie k tvojim hodnotam
-        </p>
-      )}
     </div>
   );
 };
