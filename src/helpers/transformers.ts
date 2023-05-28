@@ -16,7 +16,7 @@ export const transformResponseToPoliticalParties = (
   return response.map((item, index) => {
     // Extract all answer keys and values
     const answerEntries = Object.entries(item.fields).filter(
-      ([key, value]) => key !== "Strana"
+      ([key]) => key !== "Strana"
     );
 
     const answers = answerEntries.map(([question_id, answer_value]) => {
