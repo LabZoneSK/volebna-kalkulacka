@@ -1,24 +1,36 @@
-import React, { useState } from "react";
-import { UserAnswersProps } from "../../@types";
+import React from "react";
+import { PoliticalParty, UserAnswersProps } from "../../@types";
+import {
+  currentQuestionAtom,
+  nextQuestionAtom,
+  userMatchPartyAtom,
+  matchingQuestionsAtom,
+  questionsFormActiveAtom,
+  answersAtom,
+} from "./answers.form.atoms";
+import { nextStepAtom } from "../AppSteps/stepper.atoms";
+import { useAtom, useSetAtom } from "jotai";
+import AnswerButton from "../common/AnswerButton";
+import { AnswerButtonType } from "../../@types";
+
+import Star from "../../assets/star.svg";
+import Thumb from "../../assets/thumb.svg";
 
 const UserAnswers: React.FC<UserAnswersProps> = ({
   questions,
   politicalParties,
 }) => {
-  const [answers, setAnswers] = useState<number[]>(
-    new Array(questions.length).fill(0)
+  const [answers, setAnswers] = useAtom(answersAtom); // Use the currentStep atom
+  const [userMatchParty, setUserMatchParty] = useAtom(userMatchPartyAtom);
+  const [matchingQuestions, setMatchingQuestions] = useAtom(
+    matchingQuestionsAtom
   );
-  const [userMatchParty, setUserMatchParty] = useState<string | null>();
-  const [matchingQuestions, setMatchingQuestions] = useState<string[]>([]);
+  const [currentQuestion, setCurrentQuestion] = useAtom(currentQuestionAtom);
+  const [, nextQuestion] = useAtom(nextQuestionAtom);
+  const setQuestionsActive = useSetAtom(questionsFormActiveAtom);
+  const nextStep = useSetAtom(nextStepAtom);
 
-  const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    const newAnswers = [...answers];
-    newAnswers[index] = parseInt(event.target.value);
-    setAnswers(newAnswers);
-  };
+  setQuestionsActive(true);
 
   const calculateCompliance = (
     userAnswers: number[],
@@ -38,7 +50,7 @@ const UserAnswers: React.FC<UserAnswersProps> = ({
     return (total / count / 2 + 0.5) * 100;
   };
 
-  const handleSubmit = () => {
+  const submitAnswers = () => {
     const distances = politicalParties.map((party) => {
       const partyAnswers = questions.map((question) => {
         const answer = party.answers.find(
@@ -67,15 +79,98 @@ const UserAnswers: React.FC<UserAnswersProps> = ({
       )
       .map((question) => question.text);
 
-    setUserMatchParty(bestMatchParty.party_name);
+    setUserMatchParty(bestMatchParty);
     setMatchingQuestions(matches);
+  };
+
+  const handleResponse = (value: number) => {
+    answers[currentQuestion] = value;
+    if (currentQuestion >= questions.length - 1) {
+      submitAnswers();
+      nextStep();
+      return;
+    }
+    nextQuestion();
   };
 
   return (
     <div>
-      <h1>Volebna kalukacka</h1>
       <form onSubmit={(e) => e.preventDefault()}>
-        {questions.map((question, index) => (
+        <div className="flex w-full gap-20 px-50">
+          <div className="w-[190px] flex ">
+            <span className="font-poppins font-bold text-50 text-magenta mr-2">
+              {currentQuestion + 1}
+            </span>
+            <span className="font-poppins text-20 mt-3">
+              / {questions.length}
+            </span>
+          </div>
+          <div className="text-left">
+            <p className="font-poppins font-bold text-26 text-left mb-30">
+              {questions[currentQuestion].text}
+            </p>
+            <p className="font-poppins mb-50">
+              Fusce et volutpat lacus. Curabitur at vestibulum leo. Suspendisse
+              id volutpat velit. Suspendisse ut magna bibendum, suscipit erat
+              at, condimentum sem.
+            </p>
+
+            <div className="flex gap-70 mb-50">
+              <AnswerButton
+                onClick={() => handleResponse(1)}
+                type={AnswerButtonType.YES}
+              />
+              <AnswerButton
+                onClick={() => handleResponse(-1)}
+                type={AnswerButtonType.NO}
+              />
+            </div>
+          </div>
+        </div>
+
+        <hr />
+        <div className="flex">
+          <div className="w-1/2 py-30 border-r">
+            <button className="font-poppins text-18">
+              <div className="flex flex-row gap-20">
+                <img
+                  src={Star}
+                  alt="Je to pre mňa dôležité"
+                  className="w-[24px]"
+                />
+                <span className="font-poppins text-18">
+                  Je to pre mňa dôležité
+                </span>
+              </div>
+            </button>
+          </div>
+          <div className="w-1/2 py-30">
+            <button
+              className="font-poppins text-18"
+              onClick={() => handleResponse(0)}
+            >
+              <div className="flex flex-row gap-20">
+                <span className="font-poppins text-18">
+                  Nie je to pre mňa dôležité, preskočiť
+                </span>
+                <img
+                  src={Thumb}
+                  alt="Nie je to pre mňa dôležité, preskočiť"
+                  className="w-[24px]"
+                />
+              </div>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default UserAnswers;
+
+/*
+{questions.map((question, index) => (
           <div key={question.question_id}>
             <p>{question.text}</p>
             <input
@@ -133,9 +228,4 @@ const UserAnswers: React.FC<UserAnswersProps> = ({
             )}
           </div>
         )}
-      </form>
-    </div>
-  );
-};
-
-export default UserAnswers;
+        */
