@@ -1,8 +1,11 @@
 import Button from "./common/Button";
+import { nextStepAtom } from "./AppSteps/stepper.atoms";
+import { useAtom } from "jotai";
 
 const Welcome = () => {
+  const [, setNextStep] = useAtom(nextStepAtom);
   return (
-    <div>
+    <div className="w-930 mx-auto">
       <section className="w-full flex items-center">
         <h1 className="font-poppins text-50 font-bold w-1/2">
           Zisti, koho voliť podľa{" "}
@@ -23,7 +26,10 @@ const Welcome = () => {
           <br />
           pripravili <b>volebnú kalkulačku</b> pre každého mladého človeka.
         </p>
-        <Button />
+        <Button
+          handleClick={() => setNextStep()}
+          label="Spustiť volebnú kalkulačku"
+        />
       </section>
     </div>
   );

@@ -1,5 +1,13 @@
 import React, { useState } from "react";
 import { UserAnswersProps } from "../../@types";
+import {
+  currentQuestionAtom,
+  nextQuestionAtom,
+  previousQuestionAtom,
+} from "./answers.form.atoms";
+import { useAtom } from "jotai";
+import AnswerButton from "../common/AnswerButton";
+import { AnswerButtonType } from "../../@types";
 
 const UserAnswers: React.FC<UserAnswersProps> = ({
   questions,
@@ -10,6 +18,9 @@ const UserAnswers: React.FC<UserAnswersProps> = ({
   );
   const [userMatchParty, setUserMatchParty] = useState<string | null>();
   const [matchingQuestions, setMatchingQuestions] = useState<string[]>([]);
+  const [currentQuestion, setCurrentQuestion] = useAtom(currentQuestionAtom);
+  const [, nextQuestion] = useAtom(nextQuestionAtom);
+  const [, previousQuestion] = useAtom(previousQuestionAtom);
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -71,13 +82,55 @@ const UserAnswers: React.FC<UserAnswersProps> = ({
     setMatchingQuestions(matches);
   };
 
+  const handleResponse = () => {
+    nextQuestion();
+  };
+
   return (
     <div>
-      <h1 className="font-poppins text-3xl font-bold underline text-center">
-        Volebna kalkulacka
-      </h1>
       <form onSubmit={(e) => e.preventDefault()}>
-        {questions.map((question, index) => (
+        <div className="flex w-full gap-20">
+          <div className="w-1/5 flex ">
+            <span className="font-poppins font-bold text-50 text-magenta mr-2">
+              {currentQuestion + 1}
+            </span>
+            <span className="font-poppins text-20 mt-3">
+              / {questions.length}
+            </span>
+          </div>
+          <div className="text-left">
+            <p className="font-poppins font-bold text-26 text-left mb-30">
+              {questions[currentQuestion].text}
+            </p>
+            <p className="font-poppins mb-50">
+              Fusce et volutpat lacus. Curabitur at vestibulum leo. Suspendisse
+              id volutpat velit. Suspendisse ut magna bibendum, suscipit erat
+              at, condimentum sem.
+            </p>
+
+            <div className="flex gap-70 mb-50">
+              <AnswerButton
+                onClick={handleResponse}
+                type={AnswerButtonType.YES}
+              />
+              <AnswerButton
+                onClick={handleResponse}
+                type={AnswerButtonType.NO}
+              />
+            </div>
+          </div>
+        </div>
+
+        <hr />
+      </form>
+    </div>
+  );
+};
+
+export default UserAnswers;
+
+/*
+{questions.map((question, index) => (
           <div key={question.question_id}>
             <p>{question.text}</p>
             <input
@@ -135,9 +188,4 @@ const UserAnswers: React.FC<UserAnswersProps> = ({
             )}
           </div>
         )}
-      </form>
-    </div>
-  );
-};
-
-export default UserAnswers;
+        */

@@ -17,3 +17,8 @@ export interface PoliticalParty {
     answer_value: number;
   }[];
 }
+
+export enum AnswerButtonType {
+  YES = "yes",
+  NO = "no",
+}

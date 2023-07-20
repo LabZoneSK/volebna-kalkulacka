@@ -1,20 +1,16 @@
+import { useAtom } from "jotai";
+import { currentStepAtom } from "./stepper.atoms";
 import Welcome from "../Welcome";
-
-interface StepProps {
-  children: React.ReactNode;
-}
-
-const Step: React.FC<StepProps> = ({ children }) => {
-  return <div>{children}</div>;
-};
+import Intro from "../Intro";
+import Start from "../Start";
+import Calculator from "../Calculator";
 
 const AppStepsWrapper = () => {
-  const steps = [
-    <Step>
-      <Welcome />
-    </Step>,
-  ];
-  return <div className="mx-auto w-930">{steps.map((step) => step)}</div>;
+  const [currentStep] = useAtom(currentStepAtom); // Use the currentStep atom
+
+  const steps = [<Welcome />, <Intro />, <Start />, <Calculator />];
+
+  return <div className="mx-auto w-960">{steps[currentStep]}</div>;
 };
 
 export default AppStepsWrapper;
