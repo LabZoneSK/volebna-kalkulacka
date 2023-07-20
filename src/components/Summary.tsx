@@ -1,3 +1,4 @@
+import React from "react";
 import Star from "../assets/star.svg";
 import classNames from "classnames";
 import { useState, useRef, useEffect } from "react";

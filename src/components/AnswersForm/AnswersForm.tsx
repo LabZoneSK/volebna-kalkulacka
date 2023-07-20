@@ -1,5 +1,5 @@
 import React from "react";
-import { PoliticalParty, UserAnswersProps } from "../../@types";
+import { UserAnswersProps } from "../../@types";
 import {
   currentQuestionAtom,
   nextQuestionAtom,
@@ -9,7 +9,7 @@ import {
   answersAtom,
 } from "./answers.form.atoms";
 import { nextStepAtom } from "../AppSteps/stepper.atoms";
-import { useAtom, useSetAtom } from "jotai";
+import { useAtom, useSetAtom, useAtomValue } from "jotai";
 import AnswerButton from "../common/AnswerButton";
 import { AnswerButtonType } from "../../@types";
 
@@ -20,12 +20,10 @@ const UserAnswers: React.FC<UserAnswersProps> = ({
   questions,
   politicalParties,
 }) => {
-  const [answers, setAnswers] = useAtom(answersAtom); // Use the currentStep atom
-  const [userMatchParty, setUserMatchParty] = useAtom(userMatchPartyAtom);
-  const [matchingQuestions, setMatchingQuestions] = useAtom(
-    matchingQuestionsAtom
-  );
-  const [currentQuestion, setCurrentQuestion] = useAtom(currentQuestionAtom);
+  const answers = useAtomValue(answersAtom);
+  const setUserMatchParty = useSetAtom(userMatchPartyAtom);
+  const setMatchingQuestions = useSetAtom(matchingQuestionsAtom);
+  const currentQuestion = useAtomValue(currentQuestionAtom);
   const [, nextQuestion] = useAtom(nextQuestionAtom);
   const setQuestionsActive = useSetAtom(questionsFormActiveAtom);
   const nextStep = useSetAtom(nextStepAtom);
@@ -168,64 +166,3 @@ const UserAnswers: React.FC<UserAnswersProps> = ({
 };
 
 export default UserAnswers;
-
-/*
-{questions.map((question, index) => (
-          <div key={question.question_id}>
-            <p>{question.text}</p>
-            <input
-              type="radio"
-              name={`question_${question.question_id}`}
-              value="1"
-              checked={answers[index] === 1}
-              onChange={(e) => handleChange(e, index)}
-            />{" "}
-            Ano
-            <input
-              type="radio"
-              name={`question_${question.question_id}`}
-              value="-1"
-              checked={answers[index] === -1}
-              onChange={(e) => handleChange(e, index)}
-            />{" "}
-            Nie
-            <input
-              type="radio"
-              name={`question_${question.question_id}`}
-              value="0"
-              checked={answers[index] === 0}
-              onChange={(e) => handleChange(e, index)}
-            />{" "}
-            Neviem
-          </div>
-        ))}
-        <div className="buttons">
-          <button type="submit" onClick={handleSubmit}>
-            Vyhodnotit
-          </button>
-          <button
-            type="reset"
-            onClick={() => setAnswers(new Array(questions.length).fill(0))}
-          >
-            Reset
-          </button>
-        </div>
-
-        {userMatchParty && (
-          <div>
-            <p>
-              Strana s najviac zhodnymi odpovedami: <b>{userMatchParty}</b>
-            </p>
-            {matchingQuestions.length > 0 && (
-              <div>
-                <p>Otázky, kde sa zhodnes so stranou:</p>
-                <ul>
-                  {matchingQuestions.map((question, index) => (
-                    <li key={index}>{question}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
-        )}
-        */

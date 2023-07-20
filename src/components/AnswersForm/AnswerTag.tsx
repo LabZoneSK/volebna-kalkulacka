@@ -1,7 +1,6 @@
 import React from "react";
 import classNames from "classnames";
 
-import { ReactComponent as Thumb } from "../../assets/thumb.svg";
 import { getResponseText } from "../../helpers/answers";
 interface AnswerTagProps {
   answer: number;

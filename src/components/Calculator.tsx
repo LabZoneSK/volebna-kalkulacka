@@ -1,10 +1,12 @@
+import React from "react";
+
 import StepWrapper from "./AppSteps/StepWrapper";
 
 import UserAnswers from "./AnswersForm/AnswersForm";
 import useFetchQuestions from "../data/useFetchQuestions";
 import useFetchAnswers from "../data/useFetchAnswers";
 
-const Calculator = () => {
+const Calculator: React.FC = () => {
   const { loading, questions } = useFetchQuestions();
   const { parties } = useFetchAnswers();
 

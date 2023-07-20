@@ -1,3 +1,4 @@
+import React from "react";
 import { useAtomValue, useSetAtom } from "jotai";
 import {
   userMatchPartyAtom,
@@ -7,7 +8,7 @@ import {
 import { nextStepAtom } from "./AppSteps/stepper.atoms";
 import Button from "./common/Button";
 
-const MatchParty = () => {
+const MatchParty: React.FC = () => {
   const userMatchParty = useAtomValue(userMatchPartyAtom);
   const matchingQuestions = useAtomValue(matchingQuestionsAtom);
   const questions = useAtomValue(questionsAtom);
