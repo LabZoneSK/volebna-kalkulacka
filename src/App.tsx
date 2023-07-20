@@ -9,6 +9,8 @@ import UserAnswers from "./components/AnswersForm/AnswersForm";
 import useFetchQuestions from "./data/useFetchQuestions";
 import useFetchAnswers from "./data/useFetchAnswers";
 
+import useFetchQuestions from "./data/useFetchQuestions";
+import useFetchAnswers from "./data/useFetchAnswers";
 function App() {
   const { loading, data: questions } = useFetchQuestions();
   const { data: answers } = useFetchAnswers();
