@@ -3,8 +3,10 @@ import {
   currentQuestionAtom,
   nextQuestionAtom,
   previousQuestionAtom,
+  questionsFormActiveAtom,
+  questionsAtom,
 } from "../AnswersForm/answers.form.atoms";
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import ChevronMagenta from "../../assets/chevron-magenta.svg";
 
 interface StepWrapperProps {
@@ -12,9 +14,14 @@ interface StepWrapperProps {
 }
 
 const StepWrapper: React.FC<StepWrapperProps> = ({ children }) => {
-  const [currentQuestion, setCurrentQuestion] = useAtom(currentQuestionAtom);
+  const currentQuestion = useAtomValue(currentQuestionAtom);
+  const questionsFormActive = useAtomValue(questionsFormActiveAtom);
+  const questions = useAtomValue(questionsAtom);
   const [, nextQuestion] = useAtom(nextQuestionAtom);
   const [, previousQuestion] = useAtom(previousQuestionAtom);
+
+  const wrapperPadding = questionsFormActive ? "pt-100 px-0" : "py-77 px-100";
+
   return (
     <div className="mx-auto">
       <section className="w-full mt-62 mb-62">
@@ -36,10 +43,12 @@ const StepWrapper: React.FC<StepWrapperProps> = ({ children }) => {
       />
 
       <div className="relative">
-        <section className="text-center py-77 px-100 border border-light-grey rounded-cool shadow-custom-light backdrop-blur bg-white bg-opacity-90 w-930">
+        <section
+          className={`text-center ${wrapperPadding} border border-light-grey rounded-cool shadow-custom-light backdrop-blur bg-white bg-opacity-90 w-930`}
+        >
           {children}
         </section>
-        {currentQuestion !== 0 && (
+        {currentQuestion !== 0 && questions.length < currentQuestion && (
           <section className="absolute flex gap-930 w-960 top-200">
             <div className="w-1/2 text-left absolute -left-50">
               <button onClick={() => previousQuestion()}>

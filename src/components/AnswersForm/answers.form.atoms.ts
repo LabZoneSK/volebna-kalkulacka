@@ -1,6 +1,15 @@
 import { atom } from "jotai";
+import { PoliticalParty, Question } from "../../@types";
+
+export const questionsAtom = atom<Question[]>([]);
+export const answersAtom = atom<number[]>([]);
+export const partiesAtom = atom<PoliticalParty[]>([]);
 
 export const currentQuestionAtom = atom(0);
+export const questionsFormActiveAtom = atom(false);
+
+export const userMatchPartyAtom = atom<any>(null);
+export const matchingQuestionsAtom = atom<string[]>([]);
 
 export const nextQuestionAtom = atom(
   (get) => get(currentQuestionAtom),

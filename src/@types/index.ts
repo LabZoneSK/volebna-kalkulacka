@@ -12,6 +12,7 @@ export interface UserAnswersProps {
 export interface PoliticalParty {
   party_id: string;
   party_name: string;
+  compliance?: number;
   answers: {
     question_id: string;
     answer_value: number;

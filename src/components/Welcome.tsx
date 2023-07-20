@@ -1,9 +1,14 @@
 import Button from "./common/Button";
 import { nextStepAtom } from "./AppSteps/stepper.atoms";
-import { useAtom } from "jotai";
+import { questionsFormActiveAtom } from "./AnswersForm/answers.form.atoms";
+import { useAtom, useSetAtom } from "jotai";
 
 const Welcome = () => {
   const [, setNextStep] = useAtom(nextStepAtom);
+  const questionsFormActive = useSetAtom(questionsFormActiveAtom);
+
+  questionsFormActive(false);
+
   return (
     <div className="w-930 mx-auto">
       <section className="w-full flex items-center">

@@ -1,9 +1,17 @@
 import { useState, useEffect } from "react";
 import { fetchAirtable } from "./fetchAirtable";
 import { transformResponseToQuestions } from "../helpers/transformers";
+
+import { useAtom, useSetAtom } from "jotai";
+import {
+  questionsAtom,
+  answersAtom,
+} from "../components/AnswersForm/answers.form.atoms";
+
 const useFetchQuestions = () => {
-  const [data, setData] = useState<any>([]);
   const [loading, setLoading] = useState(true);
+  const [questions, setQuestions] = useAtom(questionsAtom);
+  const setAnswers = useSetAtom(answersAtom);
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -14,14 +22,15 @@ const useFetchQuestions = () => {
       // Transform the response to the desired format
       const transformedResult = transformResponseToQuestions(result);
 
-      setData(transformedResult);
+      setQuestions(transformedResult);
+      setAnswers(new Array(transformedResult.length).fill(0));
       setLoading(false);
     };
 
     fetchQuestions();
   }, []);
 
-  return { loading, data };
+  return { loading, questions };
 };
 
 export default useFetchQuestions;
