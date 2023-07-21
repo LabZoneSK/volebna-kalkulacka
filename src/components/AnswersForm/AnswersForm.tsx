@@ -60,6 +60,7 @@ const UserAnswers: React.FC<UserAnswersProps> = ({
       return {
         party_id: party.party_id,
         party_name: party.party_name,
+        logo: party.logo,
         compliance: calculateCompliance(answers, partyAnswers),
         answers: partyAnswers,
       };
@@ -117,10 +118,12 @@ const UserAnswers: React.FC<UserAnswersProps> = ({
               <AnswerButton
                 onClick={() => handleResponse(1)}
                 type={AnswerButtonType.YES}
+                answer={answers[currentQuestion]}
               />
               <AnswerButton
                 onClick={() => handleResponse(-1)}
                 type={AnswerButtonType.NO}
+                answer={answers[currentQuestion]}
               />
             </div>
           </div>

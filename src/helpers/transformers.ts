@@ -35,6 +35,7 @@ export const transformResponseToPoliticalParties = (
     return {
       party_id: (index + 1).toString(), // or item.id if you want to keep the original id
       party_name: item.fields.Strana,
+      logo: item.fields.Logo?.[0].url || "",
       answers,
     };
   });

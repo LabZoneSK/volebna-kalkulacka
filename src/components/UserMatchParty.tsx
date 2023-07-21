@@ -31,8 +31,13 @@ const UserMatchParty = () => {
               <th className="font-poppins font-bold text-18 py-30 px-10">
                 Tvoja odpoveď
               </th>
-              <th className="font-poppins font-bold text-18 py-30 px-10">
-                {userMatchParty?.party_name}
+              <th className="py-30 px-10 border-l">
+                <img
+                  src={userMatchParty?.logo}
+                  alt={userMatchParty.party_name}
+                  title={userMatchParty.party_name}
+                  className="max-h-[35px] mx-auto"
+                />
               </th>
             </tr>
           </thead>
@@ -40,7 +45,7 @@ const UserMatchParty = () => {
             {questions.map((question, index) => (
               <tr className={index % 2 === 0 ? "" : "bg-z-row font-bold"}>
                 <td className="py-30 pr-100 border-r">
-                  <div className="flex">
+                  <div className="grid grid-cols-[74px_1fr]">
                     <div className="text-magenta text-18 font-poppins font-bold w-[74px] text-right">
                       {index + 1}
                     </div>

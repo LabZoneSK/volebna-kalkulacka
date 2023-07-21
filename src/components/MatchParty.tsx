@@ -14,6 +14,8 @@ const MatchParty: React.FC = () => {
   const questions = useAtomValue(questionsAtom);
   const showNext = useSetAtom(nextStepAtom);
 
+  console.log(userMatchParty);
+
   return (
     <div className="mx-auto">
       <section className="w-full mt-62 mb-62">
@@ -30,9 +32,9 @@ const MatchParty: React.FC = () => {
           className={`text-center border border-light-grey rounded-cool shadow-custom-light backdrop-blur bg-white bg-opacity-90 w-930 py-77 px-100 flex flex-col items-center`}
         >
           <img
-            src="https://via.placeholder.com/180x180"
+            src={userMatchParty?.logo}
             alt=""
-            className="mb-50"
+            className="mb-50 max-h-[100px]"
           />
           <h1 className="font-popping text-30 mb-60">
             {userMatchParty?.party_name}

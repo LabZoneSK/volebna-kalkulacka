@@ -32,7 +32,7 @@ const AnswerRow: React.FC<AnswerRowProps> = ({
   const ref = useRef<HTMLDivElement>(null);
 
   const answerClass = classNames(
-    "h-[95px] py-20 px-30 bg-magenta flex flex-col justify-center rounded-r-cool",
+    "relative h-[95px] py-20 px-30 bg-magenta flex flex-col justify-center rounded-r-cool",
     {
       "bg-magenta": answer === 1,
       "bg-z-gray": answer === 0,
@@ -54,9 +54,9 @@ const AnswerRow: React.FC<AnswerRowProps> = ({
   }, []);
 
   return (
-    <div className="flex w-full items-center border border-light-grey rounded-cool relative">
-      <div className="py-20 px-30 border-r">
-        <img src={Star} alt="" />
+    <div className="grid grid-cols-[75px_1fr_140px] w-full items-center border border-light-grey rounded-cool relative">
+      <div className="border-r h-full">
+        <img src={Star} alt="" className="pl-30 py-30" />
       </div>
       <div className="flex-grow py-20 px-30 border-r flex items-center">
         <div className="font-poppins font-bold text-26 text-magenta w-[39px] text-center">
@@ -78,22 +78,23 @@ const AnswerRow: React.FC<AnswerRowProps> = ({
         </button>
 
         {show && (
-          <div className="absolute bg-white rounded-[10px] border flex flex-col -top-30 z-[9999] w-[358px]">
+          <div className="absolute top-0 z-50 w-56 mt-80 -translate-x-[55px] left-1/2 bg-white rounded-[10px] shadow-lg">
             <svg
-              width="37"
-              height="36"
+              width="26px"
+              height="26px"
               viewBox="0 0 37 36"
-              fill="none"
+              version="1.1"
               xmlns="http://www.w3.org/2000/svg"
-              className="absolute top-[-18px] left-[50px] z-10"
+              className="absolute top-[-12px] left-[62px]"
             >
               <path
-                d="M16.2634 1.12132C17.435 -0.0502521 19.3345 -0.0502525 20.5061 1.12132L36.7695 17.3848L18.3848 35.7696L-1.03712e-05 17.3848L16.2634 1.12132Z"
+                d="M16.263,1.121c1.172,-1.171 3.071,-1.171 4.243,0l16.264,16.264l-36.77,-0l16.263,-16.264Z"
                 fill="#fff"
               />
             </svg>
+
             <button
-              className="px-30 text-center hover:bg-z-hover hover:font-bold py-20 px-30"
+              className="w-full px-30 text-center hover:bg-z-hover hover:font-bold py-20 px-30"
               onClick={() => {
                 handleAnswerChange(index, 1);
                 setShow(false);
@@ -105,7 +106,7 @@ const AnswerRow: React.FC<AnswerRowProps> = ({
               </div>
             </button>
             <button
-              className="px-30 text-center hover:bg-z-hover hover:font-bold py-20 px-30"
+              className="w-full px-30 text-center hover:bg-z-hover hover:font-bold py-20 px-30"
               onClick={() => {
                 handleAnswerChange(index, -1);
                 setShow(false);
@@ -124,7 +125,7 @@ const AnswerRow: React.FC<AnswerRowProps> = ({
               }}
             >
               <div className="flex gap-20 items-center">
-                <Thumb className="w-[18px]" />
+                <Thumb className="w-[24px]" />
                 <span className="font-poppins text-18 text-left">
                   Nie je to pre mňa dôležité
                 </span>

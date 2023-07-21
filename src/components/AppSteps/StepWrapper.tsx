@@ -22,6 +22,10 @@ const StepWrapper: React.FC<StepWrapperProps> = ({ children }) => {
 
   const wrapperPadding = questionsFormActive ? "pt-100 px-0" : "py-77 px-100";
 
+  const showChevronNext =
+    currentQuestion !== 0 && questions.length > currentQuestion + 1;
+  const showChevronPrevious = currentQuestion !== 0;
+
   return (
     <div className="mx-auto">
       <section className="w-full mt-62 mb-62">
@@ -48,13 +52,17 @@ const StepWrapper: React.FC<StepWrapperProps> = ({ children }) => {
         >
           {children}
         </section>
-        {currentQuestion !== 0 && questions.length < currentQuestion && (
+        {showChevronPrevious && (
           <section className="absolute flex gap-930 w-960 top-200">
             <div className="w-1/2 text-left absolute -left-50">
               <button onClick={() => previousQuestion()}>
                 <img src={ChevronMagenta} alt="Back" />
               </button>
             </div>
+          </section>
+        )}
+        {showChevronNext && (
+          <section className="absolute flex gap-930 w-960 top-200">
             <div className="w-1/2 text-right absolute -right-20">
               <button onClick={() => nextQuestion()}>
                 <img className="rotate-180" src={ChevronMagenta} alt="Next" />
