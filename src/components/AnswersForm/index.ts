@@ -1,1 +1,1 @@
-export { default as AnswersForm } from "./AnswersForm";
+export { default as AnswersForm } from './AnswersForm'

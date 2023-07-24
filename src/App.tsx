@@ -1,7 +1,7 @@
-import AppStepsWrapper from "./components/AppSteps/AppStepsWrapper";
+import AppStepsWrapper from './components/AppSteps/AppStepsWrapper'
 
 const App = () => {
-  return <AppStepsWrapper />;
-};
+    return <AppStepsWrapper />
+}
 
-export default App;
+export default App
