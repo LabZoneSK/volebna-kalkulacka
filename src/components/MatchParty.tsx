@@ -14,8 +14,6 @@ const MatchParty: React.FC = () => {
     const questions = useAtomValue(questionsAtom)
     const showNext = useSetAtom(nextStepAtom)
 
-    console.log(userMatchParty)
-
     return (
         <div className="mx-auto">
             <section className="mb-62 mt-62 w-full">

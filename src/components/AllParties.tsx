@@ -4,7 +4,6 @@ import {
     partiesAtom,
     questionsAtom,
     answersAtom,
-    userMatchPartyAtom,
 } from './AnswersForm/answers.form.atoms'
 import { prevStepAtom } from './AppSteps/stepper.atoms'
 import AnswerTag from './AnswersForm/AnswerTag'

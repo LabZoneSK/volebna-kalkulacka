@@ -4,21 +4,25 @@ export const questionsStub: Question[] = [
         question_id: '1',
         text: 'Som za vystupenie z NATO',
         weight: 3,
+        description: 'Toto je popis k otazke',
     },
     {
         question_id: '2',
         text: 'Som za posilnenie prav LGBTI+ komunity',
         weight: 1,
+        description: 'Toto je popis k otazke',
     },
     {
         question_id: '3',
         text: 'Podporujem EU a jej rozsirovanie',
         weight: 2,
+        description: 'Toto je popis k otazke',
     },
     {
         question_id: '4',
         text: 'Som za zrusenie povinneho ockovania',
         weight: 1,
+        description: 'Toto je popis k otazke',
     },
 ]
 
