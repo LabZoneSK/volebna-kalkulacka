@@ -1,12 +1,16 @@
-import { useAtomValue } from "jotai";
+import { useSetAtom, useAtomValue } from "jotai";
 import {
   answersAtom,
   questionsAtom,
   userMatchPartyAtom,
 } from "./AnswersForm/answers.form.atoms";
+import { nextStepAtom } from "./AppSteps/stepper.atoms";
 import AnswerTag from "./AnswersForm/AnswerTag";
+import { ReactComponent as Chevron } from "../assets/chevron.svg";
+
 const UserMatchParty = () => {
   const questions = useAtomValue(questionsAtom);
+  const setNextStep = useSetAtom(nextStepAtom);
 
   const answers = useAtomValue(answersAtom);
   const userMatchParty = useAtomValue(userMatchPartyAtom);
@@ -14,13 +18,17 @@ const UserMatchParty = () => {
   return (
     <div className="mx-auto">
       <section className="w-full mt-62 mb-62 flex flex-row items-center">
-        <h1 className="w-1/2 text-left font-poppins font-bold text-40">
+        <h1 className="w-1/2 text-left font-poppins font-bold text-40 grow">
           Porovnanie so zhodujúcou stranou
         </h1>
-        <div className="">
-          <span className="font-poppins text-18">
+        <div className="text-right">
+          <a
+            className="font-poppins text-18 flex items-center gap-10"
+            onClick={() => setNextStep()}
+          >
             Porovnať so všetkými stranami
-          </span>
+            <Chevron className="text-magenta" />
+          </a>
         </div>
       </section>
       <section>

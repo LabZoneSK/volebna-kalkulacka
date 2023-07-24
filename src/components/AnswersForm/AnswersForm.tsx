@@ -109,9 +109,7 @@ const UserAnswers: React.FC<UserAnswersProps> = ({
               {questions[currentQuestion].text}
             </p>
             <p className="font-poppins mb-50">
-              Fusce et volutpat lacus. Curabitur at vestibulum leo. Suspendisse
-              id volutpat velit. Suspendisse ut magna bibendum, suscipit erat
-              at, condimentum sem.
+              {questions[currentQuestion].description}
             </p>
 
             <div className="flex gap-70 mb-50">

@@ -49,6 +49,9 @@ export default {
       backdropFilter: {
         blur: "blur(12.5px)",
       },
+      gridTemplateColumns: {
+        15: "repeat(15, minmax(0, 150px))",
+      },
     },
   },
   plugins: [],

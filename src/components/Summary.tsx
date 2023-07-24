@@ -9,8 +9,8 @@ import { nextStepAtom } from "./AppSteps/stepper.atoms";
 import { Question } from "../@types";
 import Chevron from "../assets/chevron-white.svg";
 import { ReactComponent as Thumb } from "../assets/thumb.svg";
-import yes from "../assets/yes.svg";
-import no from "../assets/no.svg";
+import { ReactComponent as Yes } from "../assets/yes.svg";
+import { ReactComponent as No } from "../assets/no.svg";
 import Button from "./common/Button";
 
 import { getResponseText } from "../helpers/answers";
@@ -101,7 +101,7 @@ const AnswerRow: React.FC<AnswerRowProps> = ({
               }}
             >
               <div className="flex gap-20 items-center">
-                <img src={yes} alt="" className="w-[18px]" />
+                <Yes className="w-[18px] text-magenta" />
                 <span className="font-poppins text-18 text-left">Ano</span>
               </div>
             </button>
@@ -113,7 +113,7 @@ const AnswerRow: React.FC<AnswerRowProps> = ({
               }}
             >
               <div className="flex gap-20 items-center">
-                <img src={no} alt="" className="w-[18px]" />
+                <No className="w-[18px] text-z-blue" />
                 <span className="font-poppins text-18 text-left">Nie</span>
               </div>
             </button>
@@ -125,7 +125,7 @@ const AnswerRow: React.FC<AnswerRowProps> = ({
               }}
             >
               <div className="flex gap-20 items-center">
-                <Thumb className="w-[24px]" />
+                <Thumb className="w-[28px]" />
                 <span className="font-poppins text-18 text-left">
                   Nie je to pre mňa dôležité
                 </span>

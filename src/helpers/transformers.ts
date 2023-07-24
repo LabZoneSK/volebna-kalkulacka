@@ -6,6 +6,7 @@ export const transformResponseToQuestions = (response: any[]): Question[] => {
       question_id: (index + 1).toString(), // or item.id if you want to keep the original id
       text: item.fields.Text,
       weight: item.fields.Weight,
+      description: item.fields.Popis,
     };
   });
 };

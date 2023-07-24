@@ -7,6 +7,7 @@ import Calculator from "../Calculator";
 import Summary from "../Summary";
 import MatchParty from "../MatchParty";
 import UserMatchParty from "../UserMatchParty";
+import AllParties from "../AllParties";
 
 const AppStepsWrapper = () => {
   const [currentStep] = useAtom(currentStepAtom); // Use the currentStep atom
@@ -19,6 +20,7 @@ const AppStepsWrapper = () => {
     <Summary />,
     <MatchParty />,
     <UserMatchParty />,
+    <AllParties />,
   ];
 
   return <div className="mx-auto w-960">{steps[currentStep]}</div>;
