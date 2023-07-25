@@ -7,6 +7,7 @@ import {
 } from './AnswersForm/answers.form.atoms'
 import { nextStepAtom } from './AppSteps/stepper.atoms'
 import Button from './common/Button'
+import ButtonsRow from './common/ButtonsRow'
 
 const MatchParty: React.FC = () => {
     const userMatchParty = useAtomValue(userMatchPartyAtom)
@@ -48,6 +49,8 @@ const MatchParty: React.FC = () => {
                     />
                 </section>
             </div>
+
+            <ButtonsRow />
         </div>
     )
 }

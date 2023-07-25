@@ -7,6 +7,7 @@ import {
 import { nextStepAtom } from './AppSteps/stepper.atoms'
 import AnswerTag from './AnswersForm/AnswerTag'
 import { ReactComponent as Chevron } from '../assets/chevron.svg'
+import ButtonsRow from './common/ButtonsRow'
 
 const UserMatchParty = () => {
     const questions = useAtomValue(questionsAtom)
@@ -79,6 +80,7 @@ const UserMatchParty = () => {
                     </tbody>
                 </table>
             </section>
+            <ButtonsRow />
         </div>
     )
 }

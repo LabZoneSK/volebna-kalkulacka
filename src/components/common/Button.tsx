@@ -1,19 +1,35 @@
 import React from 'react'
-import Chevron from '../../assets/chevron.svg'
+import classNames from 'classnames'
+import { ReactComponent as Chevron } from '../../assets/chevron.svg'
+import { ButtonType } from '../../@types'
 interface ButtonProps {
     handleClick: () => void
     label: string
+    type?: ButtonType
+    color?: string
+    icon?: React.ReactNode
 }
 
-const Button: React.FC<ButtonProps> = ({ handleClick, label }) => {
+const Button: React.FC<ButtonProps> = ({
+    handleClick,
+    label,
+    type = ButtonType.PRIMARY,
+    color = 'magenta',
+    icon = <Chevron />,
+}) => {
+    const ButtonClass = classNames(
+        'rounded-full px-30 py-20 font-poppins font-bold',
+        {
+            [`bg-${color} text-white`]: type === ButtonType.PRIMARY,
+            [`border-2 border-${color}`]: type === ButtonType.SECONDARY,
+        }
+    )
+
     return (
-        <button
-            className="rounded-full bg-magenta px-30 py-20 font-poppins font-bold text-white"
-            onClick={handleClick}
-        >
-            <div className="flex gap-50">
+        <button className={ButtonClass} onClick={handleClick}>
+            <div className="flex flex-row items-center gap-50">
                 <span className="text-lg">{label}</span>
-                <img src={Chevron} alt="chevron" />
+                <span className={`text-${color}`}>{icon}</span>
             </div>
         </button>
     )

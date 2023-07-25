@@ -25,3 +25,9 @@ export enum AnswerButtonType {
     YES = 'yes',
     NO = 'no',
 }
+
+export enum ButtonType {
+    PRIMARY = 'primary',
+    SECONDARY = 'secondary',
+    INVERTED = 'inverted',
+}
