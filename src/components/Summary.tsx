@@ -1,5 +1,4 @@
 import React from 'react'
-import Star from '../assets/star.svg'
 import classNames from 'classnames'
 import { useState, useRef, useEffect } from 'react'
 
@@ -14,6 +13,8 @@ import { ReactComponent as No } from '../assets/no.svg'
 import Button from './common/Button'
 
 import { getResponseText } from '../helpers/answers'
+import { ReactComponent as Star } from '../assets/star.svg'
+import { ReactComponent as StarFull } from '../assets/star_full.svg'
 
 interface AnswerRowProps {
     question: Question
@@ -53,10 +54,16 @@ const AnswerRow: React.FC<AnswerRowProps> = ({
         }
     }, [])
 
+    //TODO: Allow to change importance and recalculate party match
+
     return (
         <div className="relative grid w-full grid-cols-[75px_1fr_140px] items-center rounded-cool border border-light-grey">
-            <div className="h-full border-r">
-                <img src={Star} alt="" className="py-30 pl-30" />
+            <div className="flex h-full flex-col items-center justify-center border-r">
+                {question.isImportant ? (
+                    <StarFull className="w-[39px] text-center text-magenta" />
+                ) : (
+                    <Star className="w-[39px] text-center text-magenta" />
+                )}
             </div>
             <div className="flex flex-grow items-center border-r px-30 py-20">
                 <div className="w-[39px] text-center font-poppins text-26 font-bold text-magenta">

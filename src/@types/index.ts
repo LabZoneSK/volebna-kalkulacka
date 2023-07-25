@@ -3,6 +3,7 @@ export interface Question {
     description: string
     text: string
     weight: number
+    isImportant?: boolean
 }
 
 export interface UserAnswersProps {

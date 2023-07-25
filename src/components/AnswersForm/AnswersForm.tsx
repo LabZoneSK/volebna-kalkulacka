@@ -13,7 +13,8 @@ import { useAtom, useSetAtom, useAtomValue } from 'jotai'
 import AnswerButton from '../common/AnswerButton'
 import { AnswerButtonType } from '../../@types'
 
-import Star from '../../assets/star.svg'
+import { ReactComponent as Star } from '../../assets/star.svg'
+import { ReactComponent as StarFull } from '../../assets/star_full.svg'
 import Thumb from '../../assets/thumb.svg'
 
 const UserAnswers: React.FC<UserAnswersProps> = ({
@@ -28,6 +29,10 @@ const UserAnswers: React.FC<UserAnswersProps> = ({
     const setQuestionsActive = useSetAtom(questionsFormActiveAtom)
     const nextStep = useSetAtom(nextStepAtom)
 
+    const [importantQuestions, setImportantQuestions] = React.useState<
+        boolean[]
+    >(new Array(questions.length).fill(false))
+
     setQuestionsActive(true)
 
     const calculateCompliance = (
@@ -38,12 +43,15 @@ const UserAnswers: React.FC<UserAnswersProps> = ({
         let count = 0
 
         userAnswers.forEach((answer, index) => {
-            if (answer !== 0) {
-                total +=
-                    (answer === partyAnswers[index] ? 1 : -1) *
-                    questions[index].weight
-                count += questions[index].weight
+            if (answer === 0) {
+                return
             }
+            // Increase the weight if the question is important
+            const weight = questions[index].isImportant
+                ? questions[index].weight * 2
+                : questions[index].weight
+            total += (answer === partyAnswers[index] ? 1 : -1) * weight
+            count += weight
         })
 
         return (total / count / 2 + 0.5) * 100
@@ -131,13 +139,22 @@ const UserAnswers: React.FC<UserAnswersProps> = ({
                 <hr />
                 <div className="flex">
                     <div className="w-1/2 border-r py-30">
-                        <button className="font-poppins text-18">
+                        <button
+                            className="font-poppins text-18"
+                            onClick={() => {
+                                questions[currentQuestion].isImportant =
+                                    !questions[currentQuestion].isImportant
+                                importantQuestions[currentQuestion] =
+                                    !importantQuestions[currentQuestion]
+                                setImportantQuestions([...importantQuestions])
+                            }}
+                        >
                             <div className="flex flex-row gap-20">
-                                <img
-                                    src={Star}
-                                    alt="Je to pre mňa dôležité"
-                                    className="w-[24px]"
-                                />
+                                {importantQuestions[currentQuestion] ? (
+                                    <StarFull className="w-[24px]" />
+                                ) : (
+                                    <Star className="w-[24px]" />
+                                )}
                                 <span className="font-poppins text-18">
                                     Je to pre mňa dôležité
                                 </span>
