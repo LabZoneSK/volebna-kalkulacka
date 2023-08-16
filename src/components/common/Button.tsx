@@ -15,7 +15,7 @@ const Button: React.FC<ButtonProps> = ({
     label,
     type = ButtonType.PRIMARY,
     color = 'magenta',
-    icon = <Chevron />,
+    icon = <Chevron className="text-white" />,
 }) => {
     const ButtonClass = classNames(
         'rounded-full px-30 py-20 font-poppins font-bold',

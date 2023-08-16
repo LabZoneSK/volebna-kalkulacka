@@ -8,7 +8,7 @@ const Intro = () => {
     return (
         <StepWrapper>
             <p className="mb-6 font-poppins">
-                Opýtame sa ťa <b>15 otázok</b>, ktoré trápia mladých.
+                Opýtame sa ťa <b>29 otázok</b>, ktoré trápia mladých.
             </p>
             <p className="mb-62 font-poppins">
                 Odpovedať môžeš <b>Áno, Nie</b>, otázku označiť za{' '}

@@ -54,7 +54,7 @@ const StepWrapper: React.FC<StepWrapperProps> = ({ children }) => {
                 </section>
                 {showChevronPrevious && (
                     <section className="gap-930 absolute top-200 flex w-960">
-                        <div className="absolute -left-50 w-1/2 text-left">
+                        <div className="absolute -left-50 text-left">
                             <button onClick={() => previousQuestion()}>
                                 <img src={ChevronMagenta} alt="Back" />
                             </button>
@@ -63,7 +63,7 @@ const StepWrapper: React.FC<StepWrapperProps> = ({ children }) => {
                 )}
                 {showChevronNext && (
                     <section className="gap-930 absolute top-200 flex w-960">
-                        <div className="absolute -right-20 w-1/2 text-right">
+                        <div className="absolute -right-20 text-right">
                             <button onClick={() => nextQuestion()}>
                                 <img
                                     className="rotate-180"

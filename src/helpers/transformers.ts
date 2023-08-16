@@ -5,8 +5,8 @@ export const transformResponseToQuestions = (response: any[]): Question[] => {
         return {
             question_id: (index + 1).toString(), // or item.id if you want to keep the original id
             text: item.fields.Text,
-            weight: item.fields.Weight,
-            description: item.fields.Popis,
+            weight: item.fields.Weight || 1,
+            description: item.fields.Popis || '',
         }
     })
 }

@@ -117,9 +117,12 @@ const UserAnswers: React.FC<UserAnswersProps> = ({
                         <p className="mb-30 text-left font-poppins text-26 font-bold">
                             {questions[currentQuestion].text}
                         </p>
-                        <p className="mb-50 font-poppins">
-                            {questions[currentQuestion].description}
-                        </p>
+
+                        {questions[currentQuestion].description && (
+                            <p className="mb-50 font-poppins">
+                                {questions[currentQuestion].description}
+                            </p>
+                        )}
 
                         <div className="mb-50 flex gap-70">
                             <AnswerButton
