@@ -8,6 +8,8 @@ import { nextStepAtom } from './AppSteps/stepper.atoms'
 import AnswerTag from './AnswersForm/AnswerTag'
 import { ReactComponent as Chevron } from '../assets/chevron.svg'
 import ButtonsRow from './common/ButtonsRow'
+import classNames from 'classnames'
+import { Tooltip } from '@material-tailwind/react'
 
 const UserMatchParty = () => {
     const questions = useAtomValue(questionsAtom)
@@ -70,9 +72,10 @@ const UserMatchParty = () => {
                                 <td className="w-1/6 px-30 text-center">
                                     <AnswerTag answer={answers[index]} />
                                 </td>
-                                <td className="w-1/6 border-l px-30 text-center">
+                                <td className="relative w-1/6 border-l px-30 text-center">
                                     <AnswerTag
                                         answer={userMatchParty.answers[index]}
+                                        currentParty={userMatchParty}
                                     />
                                 </td>
                             </tr>

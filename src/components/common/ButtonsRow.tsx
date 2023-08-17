@@ -2,6 +2,7 @@ import { useCallback } from 'react'
 import Button from './Button'
 import { ButtonType } from '../../@types'
 import { ReactComponent as Share } from '../../assets/share.svg'
+import { ReactComponent as Chevron } from '../../assets/chevron.svg'
 import { currentStepAtom } from '../AppSteps/stepper.atoms'
 import { currentQuestionAtom } from '../AnswersForm/answers.form.atoms'
 import { useSetAtom } from 'jotai'
@@ -26,6 +27,7 @@ const ButtonsRow = () => {
                 handleClick={resetApp}
                 label="Spustiť kalkulačku znova"
                 type={ButtonType.SECONDARY}
+                icon={<Chevron className="text-magenta" />}
             />
             <Button
                 handleClick={() => shareResults()}

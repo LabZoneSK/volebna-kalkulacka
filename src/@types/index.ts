@@ -11,15 +11,17 @@ export interface UserAnswersProps {
     politicalParties: PoliticalParty[]
 }
 
+export interface Answer {
+    question_id: string
+    answer_value: number
+    explanation: string | null
+}
 export interface PoliticalParty {
     party_id: string
     party_name: string
     compliance?: number
     logo?: string
-    answers: {
-        question_id: string
-        answer_value: number
-    }[]
+    answers: Answer[]
 }
 
 export enum AnswerButtonType {

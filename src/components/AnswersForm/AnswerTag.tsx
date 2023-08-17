@@ -2,11 +2,14 @@ import React from 'react'
 import classNames from 'classnames'
 
 import { getResponseText } from '../../helpers/answers'
+import { Tooltip } from '@material-tailwind/react'
+import { Answer } from '../../@types'
 interface AnswerTagProps {
     answer: number
+    currentParty?: Answer
 }
 
-const AnswerTag: React.FC<AnswerTagProps> = ({ answer }) => {
+const AnswerTag: React.FC<AnswerTagProps> = ({ answer, currentParty }) => {
     const TagClass = classNames(
         'flex gap-20 items-center justify-center rounded-full py-10 text-center font-bold font-poppins',
         {
@@ -14,12 +17,36 @@ const AnswerTag: React.FC<AnswerTagProps> = ({ answer }) => {
             'bg-z-blue text-white': answer === -1,
         }
     )
+
+    console.log(currentParty)
+    if (!currentParty?.explanation)
+        return (
+            <div className={TagClass}>
+                <span className="select-none text-left font-poppins text-18">
+                    {getResponseText(answer)}
+                </span>
+            </div>
+        )
+
     return (
-        <div className={TagClass}>
-            <span className="text-left font-poppins text-18">
-                {getResponseText(answer)}
-            </span>
-        </div>
+        <Tooltip
+            content={
+                currentParty?.explanation ? (
+                    <p className="font-poppins">{currentParty?.explanation}</p>
+                ) : null
+            }
+            placement="bottom"
+            className={classNames('w-[320px] bg-white p-3 text-black shadow', {
+                'bg-[#DCE5FF]': currentParty?.answer_value === -1,
+                'bg-[#F1DEE9]': currentParty?.answer_value === 1,
+            })}
+        >
+            <div className={TagClass}>
+                <span className="select-none text-left font-poppins text-18">
+                    {getResponseText(answer)}
+                </span>
+            </div>
+        </Tooltip>
     )
 }
 

@@ -66,12 +66,20 @@ const UserAnswers: React.FC<UserAnswersProps> = ({
                 return answer ? answer.answer_value : 0
             })
 
+            const partyAnswerExplanation = questions.map((question) => {
+                const answer = party.answers.find(
+                    (a) => a.question_id === question.question_id
+                )
+                return answer ? answer.explanation : ''
+            })
+
             return {
                 party_id: party.party_id,
                 party_name: party.party_name,
                 logo: party.logo,
                 compliance: calculateCompliance(answers, partyAnswers),
                 answers: partyAnswers,
+                explanations: partyAnswerExplanation,
             }
         })
 
