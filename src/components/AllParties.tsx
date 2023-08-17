@@ -9,6 +9,7 @@ import { prevStepAtom } from './AppSteps/stepper.atoms'
 import AnswerTag from './AnswersForm/AnswerTag'
 import { ReactComponent as Chevron } from '../assets/chevron.svg'
 import ButtonsRow from './common/ButtonsRow'
+import { Tooltip } from '@material-tailwind/react'
 
 const AllParties = () => {
     const questions = useAtomValue(questionsAtom)
@@ -57,59 +58,68 @@ const AllParties = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {questions.map((question, index) => (
-                            <tr
-                                className={
-                                    index % 2 === 0 ? '' : 'bg-z-row font-bold'
-                                }
-                            >
-                                <td
+                        {questions.map((question, index) => {
+                            return (
+                                <tr
                                     className={
-                                        'sticky left-0 bg-white py-30 pr-100' +
-                                        (index % 2 === 0
+                                        index % 2 === 0
                                             ? ''
-                                            : ' bg-z-row font-bold')
+                                            : 'bg-z-row font-bold'
                                     }
                                 >
-                                    <div className="grid grid-cols-[74px_1fr]">
-                                        <div className="w-[74px] text-right font-poppins text-18 font-bold text-magenta">
-                                            {index + 1}
-                                        </div>
-                                        <div className="pl-20 font-poppins">
-                                            {question.text}
-                                        </div>
-                                    </div>
-                                </td>
-                                <td
-                                    className={classNames(
-                                        'sticky left-[550px] w-[170px] border-l border-r px-30 text-center',
-                                        {
-                                            'bg-white': index % 2 === 0,
-                                            'bg-z-row': index % 2 !== 0,
-                                        }
-                                    )}
-                                >
-                                    <AnswerTag answer={answers[index]} />
-                                </td>
-                                {parties.map((party, i) => (
                                     <td
-                                        className="w-1/6 border-l px-30 text-center"
-                                        key={i}
+                                        className={
+                                            'sticky left-0 bg-white py-30 pr-100' +
+                                            (index % 2 === 0
+                                                ? ''
+                                                : ' bg-z-row font-bold')
+                                        }
                                     >
-                                        <AnswerTag
-                                            answer={
-                                                party.answers.find(
-                                                    (a) =>
-                                                        Number.parseInt(
-                                                            a.question_id
-                                                        ) === index
-                                                )?.answer_value || 0
-                                            }
-                                        />
+                                        <div className="grid grid-cols-[74px_1fr]">
+                                            <div className="w-[74px] text-right font-poppins text-18 font-bold text-magenta">
+                                                {index + 1}
+                                            </div>
+                                            <div className="pl-20 font-poppins">
+                                                {question.text}
+                                            </div>
+                                        </div>
                                     </td>
-                                ))}
-                            </tr>
-                        ))}
+                                    <td
+                                        className={classNames(
+                                            'sticky left-[550px] w-[170px] border-l border-r px-30 text-center',
+                                            {
+                                                'bg-white': index % 2 === 0,
+                                                'bg-z-row': index % 2 !== 0,
+                                            }
+                                        )}
+                                    >
+                                        <AnswerTag answer={answers[index]} />
+                                    </td>
+                                    {parties.map((party, i) => {
+                                        const currentParty = party.answers.find(
+                                            (a) =>
+                                                Number.parseInt(
+                                                    a.question_id
+                                                ) === index
+                                        )
+                                        return (
+                                            <td
+                                                className="w-1/6 border-l px-30 text-center"
+                                                key={i}
+                                            >
+                                                <AnswerTag
+                                                    answer={
+                                                        currentParty?.answer_value ||
+                                                        0
+                                                    }
+                                                    currentParty={currentParty}
+                                                />
+                                            </td>
+                                        )
+                                    })}
+                                </tr>
+                            )
+                        })}
                     </tbody>
                 </table>
             </section>
