@@ -9,7 +9,6 @@ import { prevStepAtom } from './AppSteps/stepper.atoms'
 import AnswerTag from './AnswersForm/AnswerTag'
 import { ReactComponent as Chevron } from '../assets/chevron.svg'
 import ButtonsRow from './common/ButtonsRow'
-import { Tooltip } from '@material-tailwind/react'
 
 const AllParties = () => {
     const questions = useAtomValue(questionsAtom)

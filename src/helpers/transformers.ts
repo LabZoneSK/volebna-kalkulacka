@@ -1,4 +1,4 @@
-import { Question, PoliticalParty } from '../@types'
+import { Question, PoliticalParty, Answer } from '../@types'
 
 export const transformResponseToQuestions = (response: any[]): Question[] => {
     return response.map((item, index) => {
@@ -41,7 +41,7 @@ export const transformResponseToPoliticalParties = (
                     explanation: explanation || null, // set to null if no explanation exists
                 }
             })
-            .filter((answer) => answer !== null) // filter out null answers
+            .filter((answer): answer is Answer => answer !== null)
 
         return {
             party_id: (index + 1).toString(), // or item.id if you want to keep the original id
