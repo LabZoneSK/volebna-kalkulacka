@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    --zmudri-purple: #c01a72;
+}
+.markdown-content a {
+    color: var(--zmudri-purple);
+}

@@ -41,7 +41,7 @@ const AnswerButton: React.FC<AnswerButtonProps> = ({
                     <>
                         <Yes className="w-[24px]" />
                         <span className="font-poppins text-18 font-bold">
-                            Ano
+                            Áno
                         </span>{' '}
                     </>
                 ) : (

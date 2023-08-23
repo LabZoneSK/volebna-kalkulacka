@@ -16,6 +16,7 @@ import { AnswerButtonType } from '../../@types'
 import { ReactComponent as Star } from '../../assets/star.svg'
 import { ReactComponent as StarFull } from '../../assets/star_full.svg'
 import Thumb from '../../assets/thumb.svg'
+import ReactMarkdown from 'react-markdown'
 
 const UserAnswers: React.FC<UserAnswersProps> = ({
     questions,
@@ -109,6 +110,8 @@ const UserAnswers: React.FC<UserAnswersProps> = ({
         nextQuestion()
     }
 
+    console.log(questions[currentQuestion].description)
+
     return (
         <div>
             <form onSubmit={(e) => e.preventDefault()}>
@@ -127,9 +130,11 @@ const UserAnswers: React.FC<UserAnswersProps> = ({
                         </p>
 
                         {questions[currentQuestion].description && (
-                            <p className="mb-50 font-poppins">
-                                {questions[currentQuestion].description}
-                            </p>
+                            <div className="markdown-content mb-50 font-poppins">
+                                <ReactMarkdown linkTarget="_blank">
+                                    {questions[currentQuestion].description}
+                                </ReactMarkdown>
+                            </div>
                         )}
 
                         <div className="mb-50 flex gap-70">

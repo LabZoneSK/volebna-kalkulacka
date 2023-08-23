@@ -16,7 +16,7 @@ const Welcome = () => {
                     Zisti, koho voliť podľa{' '}
                     <span className="text-magenta">tvojich hodnôt</span>!
                 </h1>
-                <img src="/images/welcome-x.png" alt="" />
+                <img src="/images/nadej.png" alt="" className="w-[455px]" />
             </section>
 
             <section className="rounded-cool border border-light-grey px-100 py-77 text-center shadow-custom-light backdrop-blur">
