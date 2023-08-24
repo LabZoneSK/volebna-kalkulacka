@@ -10,17 +10,21 @@ const Welcome = () => {
     questionsFormActive(false)
 
     return (
-        <div className="mx-auto w-930">
-            <section className="flex w-full items-center">
-                <h1 className="w-1/2 font-poppins text-50 font-bold">
+        <div className="mx-auto w-full md:w-930">
+            <section className="flex w-full flex-col-reverse items-center md:flex-row">
+                <h1 className="w-2/3 font-poppins text-50 font-bold md:w-1/2">
                     Zisti, koho voliť podľa{' '}
                     <span className="text-magenta">tvojich hodnôt</span>!
                 </h1>
-                <img src="/images/nadej.png" alt="" className="w-[455px]" />
+                <img
+                    src="/images/nadej.png"
+                    alt=""
+                    className="w-2/3 md:w-[455px]"
+                />
             </section>
 
             <section className="rounded-cool border border-light-grey px-100 py-77 text-center shadow-custom-light backdrop-blur">
-                <h2 className="mb-10 text-center text-34 font-bold uppercase text-magenta">
+                <h2 className="mb-10 text-center font-poppins text-34 font-bold uppercase text-magenta">
                     Nevyberaj ľudí, voľ hodnoty!
                 </h2>
                 <p className="mb-50 font-poppins">

@@ -38,10 +38,10 @@ const StepWrapper: React.FC<StepWrapperProps> = ({ children }) => {
                 src="/images/big-x.png"
                 alt=""
                 style={{
-                    width: '772px',
-                    height: '737px',
+                    width: '750px',
+                    height: '700px',
                     right: '0',
-                    top: '124px',
+                    top: '100px',
                     position: 'absolute',
                 }}
             />

@@ -15,6 +15,7 @@ import Button from './common/Button'
 import { getResponseText } from '../helpers/answers'
 import { ReactComponent as Star } from '../assets/star.svg'
 import { ReactComponent as StarFull } from '../assets/star_full.svg'
+import { useMatchingLogic } from './AnswersForm/useMatchingLogic'
 
 interface AnswerRowProps {
     question: Question
@@ -31,6 +32,8 @@ const AnswerRow: React.FC<AnswerRowProps> = ({
 }) => {
     const [show, setShow] = useState(false)
     const ref = useRef<HTMLDivElement>(null)
+    const [questions, setQuestions] = useAtom(questionsAtom)
+    const { submitAnswers } = useMatchingLogic()
 
     const answerClass = classNames(
         'relative h-[95px] py-20 px-30 bg-magenta flex flex-col justify-center rounded-r-cool',
@@ -54,16 +57,28 @@ const AnswerRow: React.FC<AnswerRowProps> = ({
         }
     }, [])
 
-    //TODO: Allow to change importance and recalculate party match
+    const changeImportanceOfQuestion = (question: Question) => {
+        const updatedQuestions = questions.map((q: Question) => {
+            if (q.question_id === question.question_id) {
+                q.isImportant = !question.isImportant
+                return q
+            }
+            return q
+        })
+        setQuestions(updatedQuestions)
+        submitAnswers()
+    }
 
     return (
         <div className="relative grid w-full grid-cols-[75px_1fr_140px] items-center rounded-cool border border-light-grey">
             <div className="flex h-full flex-col items-center justify-center border-r">
-                {question.isImportant ? (
-                    <StarFull className="w-[39px] text-center text-magenta" />
-                ) : (
-                    <Star className="w-[39px] text-center text-magenta" />
-                )}
+                <button onClick={() => changeImportanceOfQuestion(question)}>
+                    {question.isImportant ? (
+                        <StarFull className="w-[39px] text-center text-magenta" />
+                    ) : (
+                        <Star className="w-[39px] text-center text-magenta" />
+                    )}
+                </button>
             </div>
             <div className="flex flex-grow items-center border-r px-30 py-20">
                 <div className="w-[39px] text-center font-poppins text-26 font-bold text-magenta">
@@ -104,13 +119,14 @@ const AnswerRow: React.FC<AnswerRowProps> = ({
                             className="w-full px-30 px-30 py-20 text-center hover:bg-z-hover hover:font-bold"
                             onClick={() => {
                                 handleAnswerChange(index, 1)
+                                submitAnswers()
                                 setShow(false)
                             }}
                         >
                             <div className="flex items-center gap-20">
                                 <Yes className="w-[18px] text-magenta" />
                                 <span className="text-left font-poppins text-18">
-                                    Ano
+                                    Áno
                                 </span>
                             </div>
                         </button>
@@ -118,6 +134,7 @@ const AnswerRow: React.FC<AnswerRowProps> = ({
                             className="w-full px-30 px-30 py-20 text-center hover:bg-z-hover hover:font-bold"
                             onClick={() => {
                                 handleAnswerChange(index, -1)
+                                submitAnswers()
                                 setShow(false)
                             }}
                         >
@@ -132,6 +149,7 @@ const AnswerRow: React.FC<AnswerRowProps> = ({
                             className="px-30 px-30 py-20 text-center hover:bg-z-hover hover:font-bold"
                             onClick={() => {
                                 handleAnswerChange(index, 0)
+                                submitAnswers()
                                 setShow(false)
                             }}
                         >
