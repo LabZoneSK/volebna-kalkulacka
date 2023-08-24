@@ -40,14 +40,14 @@ const AnswerButton: React.FC<AnswerButtonProps> = ({
                 {type === AnswerButtonType.YES ? (
                     <>
                         <Yes className="w-[24px]" />
-                        <span className="font-poppins text-18 font-bold">
+                        <span className="select-none font-poppins text-18 font-bold">
                             Áno
                         </span>{' '}
                     </>
                 ) : (
                     <>
                         <No className="w-[18px]" />
-                        <span className="font-poppins text-18 font-bold">
+                        <span className="select-none font-poppins text-18 font-bold">
                             Nie
                         </span>{' '}
                     </>

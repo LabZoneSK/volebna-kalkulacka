@@ -101,7 +101,7 @@ const UserAnswers: React.FC<UserAnswersProps> = ({ questions }) => {
                                 ) : (
                                     <Star className="w-[24px]" />
                                 )}
-                                <span className="font-poppins text-18">
+                                <span className="select-none select-none font-poppins text-18">
                                     Je to pre mňa dôležité
                                 </span>
                             </div>

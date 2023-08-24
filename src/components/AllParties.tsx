@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import { useSetAtom, useAtomValue } from 'jotai'
 import classNames from 'classnames'
 import {
@@ -9,6 +10,7 @@ import { prevStepAtom } from './AppSteps/stepper.atoms'
 import AnswerTag from './AnswersForm/AnswerTag'
 import { ReactComponent as Chevron } from '../assets/chevron.svg'
 import ButtonsRow from './common/ButtonsRow'
+import { useDrag } from 'react-use-gesture'
 
 const AllParties = () => {
     const questions = useAtomValue(questionsAtom)
@@ -16,6 +18,15 @@ const AllParties = () => {
 
     const answers = useAtomValue(answersAtom)
     const parties = useAtomValue(partiesAtom)
+
+    const scrollRef = useRef<HTMLElement | null>(null)
+
+    const bind = useDrag(({ movement: [mx], lastOffset: [ox] }) => {
+        const el = scrollRef.current
+        if (el) {
+            el.scrollLeft = ox - mx
+        }
+    })
 
     return (
         <div className="mx-auto overflow-hidden">
@@ -33,7 +44,11 @@ const AllParties = () => {
                     </a>
                 </div>
             </section>
-            <section className="absolute left-0 w-[100vw] overflow-x-scroll">
+            <section
+                className="absolute left-0 w-full overflow-x-scroll"
+                {...bind()}
+                ref={scrollRef}
+            >
                 <table className="border-separate border-spacing-0">
                     <thead>
                         <tr className="border-b">
@@ -99,7 +114,8 @@ const AllParties = () => {
                                             (a) =>
                                                 Number.parseInt(
                                                     a.question_id
-                                                ) === index
+                                                ) ===
+                                                index + 1
                                         )
                                         return (
                                             <td
@@ -121,6 +137,7 @@ const AllParties = () => {
                         })}
                     </tbody>
                 </table>
+
                 <ButtonsRow />
             </section>
         </div>

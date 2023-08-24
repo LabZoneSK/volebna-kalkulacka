@@ -24,7 +24,7 @@ const AppStepsWrapper = () => {
     ]
 
     return (
-        <div className="mx-auto w-full px-3 md:w-960 md:px-0">
+        <div className="mx-auto w-full overflow-hidden px-3 md:w-960 md:px-0">
             {steps[currentStep]}
         </div>
     )
