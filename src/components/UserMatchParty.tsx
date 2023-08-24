@@ -18,11 +18,11 @@ const UserMatchParty = () => {
 
     return (
         <div className="mx-auto">
-            <section className="mb-62 mt-62 flex w-full flex-row items-center">
-                <h1 className="w-1/2 grow text-left font-poppins text-40 font-bold">
+            <section className="mb-62 mt-62 flex w-full flex-col items-start md:flex-row md:items-center">
+                <h1 className="w-full grow text-left font-poppins text-3xl font-bold md:w-1/2 md:text-40">
                     Porovnanie so zhodujúcou stranou
                 </h1>
-                <div className="text-right">
+                <div className="mt-4 text-right md:mt-0">
                     <a
                         className="flex items-center gap-10 font-poppins text-18"
                         onClick={() => setNextStep()}
@@ -33,7 +33,7 @@ const UserMatchParty = () => {
                 </div>
             </section>
             <section>
-                <table className="w-930">
+                <table className="w-full md:w-930">
                     <thead>
                         <tr className="border-b">
                             <th className="border-r" />
@@ -57,8 +57,8 @@ const UserMatchParty = () => {
                                     index % 2 === 0 ? '' : 'bg-z-row font-bold'
                                 }
                             >
-                                <td className="border-r py-30 pr-100">
-                                    <div className="grid grid-cols-[74px_1fr]">
+                                <td className="border-r py-30 md:pr-100">
+                                    <div className="flex md:grid md:grid-cols-[74px_1fr]">
                                         <div className="w-[74px] text-right font-poppins text-18 font-bold text-magenta">
                                             {index + 1}
                                         </div>

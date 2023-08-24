@@ -20,7 +20,9 @@ const StepWrapper: React.FC<StepWrapperProps> = ({ children }) => {
     const [, nextQuestion] = useAtom(nextQuestionAtom)
     const [, previousQuestion] = useAtom(previousQuestionAtom)
 
-    const wrapperPadding = questionsFormActive ? 'pt-100 px-0' : 'py-77 px-100'
+    const wrapperPadding = questionsFormActive
+        ? 'pt-100 px-0'
+        : 'py-12 md:py-77 px-8 md:px-100'
 
     const showChevronNext =
         currentQuestion !== 0 && questions.length > currentQuestion + 1
@@ -48,12 +50,12 @@ const StepWrapper: React.FC<StepWrapperProps> = ({ children }) => {
 
             <div className="relative">
                 <section
-                    className={`text-center ${wrapperPadding} w-930 rounded-cool border border-light-grey bg-white bg-opacity-90 shadow-custom-light backdrop-blur`}
+                    className={`text-center ${wrapperPadding} w-full rounded-cool border border-light-grey bg-white bg-opacity-90 shadow-custom-light backdrop-blur md:w-930`}
                 >
                     {children}
                 </section>
                 {showChevronPrevious && (
-                    <section className="gap-930 absolute top-200 flex w-960">
+                    <section className="gap-930 absolute top-200 flex w-full md:w-960">
                         <div className="absolute -left-50 text-left">
                             <button onClick={() => previousQuestion()}>
                                 <img src={ChevronMagenta} alt="Back" />

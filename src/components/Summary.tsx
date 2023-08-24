@@ -36,7 +36,7 @@ const AnswerRow: React.FC<AnswerRowProps> = ({
     const { submitAnswers } = useMatchingLogic()
 
     const answerClass = classNames(
-        'relative h-[95px] py-20 px-30 bg-magenta flex flex-col justify-center rounded-r-cool',
+        'relative h-[95px] py-20 px-30 bg-magenta flex flex-col justify-center rounded-bl-cool rounded-br-cool md:rounded-l-none md:rounded-r-cool items-center',
         {
             'bg-magenta': answer === 1,
             'bg-z-gray': answer === 0,
@@ -70,8 +70,8 @@ const AnswerRow: React.FC<AnswerRowProps> = ({
     }
 
     return (
-        <div className="relative grid w-full grid-cols-[75px_1fr_140px] items-center rounded-cool border border-light-grey">
-            <div className="flex h-full flex-col items-center justify-center border-r">
+        <div className="relative grid w-full grid-cols-1 items-center rounded-cool border border-light-grey md:grid-cols-[75px_1fr_140px]">
+            <div className="mt-6 flex h-full flex-col items-center justify-center border-r md:mt-0">
                 <button onClick={() => changeImportanceOfQuestion(question)}>
                     {question.isImportant ? (
                         <StarFull className="w-[39px] text-center text-magenta" />
@@ -80,7 +80,7 @@ const AnswerRow: React.FC<AnswerRowProps> = ({
                     )}
                 </button>
             </div>
-            <div className="flex flex-grow items-center border-r px-30 py-20">
+            <div className="mx-6 flex flex-grow items-center py-20 md:mx-0 md:px-30 md:py-0">
                 <div className="w-[39px] text-center font-poppins text-26 font-bold text-magenta">
                     {index + 1}
                 </div>
@@ -181,7 +181,7 @@ const Summary = () => {
                     Chceš niečo zmeniť?
                 </h1>
             </section>
-            <section className="mx-auto mb-80 w-930">
+            <section className="mx-auto mb-80 w-full md:w-930">
                 <div className="flex flex-col gap-20 ">
                     {questions.map((question, index) => (
                         <AnswerRow

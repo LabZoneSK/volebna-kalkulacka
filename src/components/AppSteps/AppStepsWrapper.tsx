@@ -23,7 +23,11 @@ const AppStepsWrapper = () => {
         <AllParties />,
     ]
 
-    return <div className="mx-auto w-960">{steps[currentStep]}</div>
+    return (
+        <div className="mx-auto w-full px-3 md:w-960 md:px-0">
+            {steps[currentStep]}
+        </div>
+    )
 }
 
 export default AppStepsWrapper

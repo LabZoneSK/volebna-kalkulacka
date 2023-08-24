@@ -18,7 +18,7 @@ const MatchParty: React.FC = () => {
     return (
         <div className="mx-auto">
             <section className="mb-62 mt-62 w-full">
-                <h1 className="text-center font-poppins text-40 font-bold">
+                <h1 className="text-center font-poppins text-3xl font-bold md:text-40">
                     Tvoje hodnoty sa najviac (
                     {Math.round(
                         (matchingQuestions.length / questions.length) * 100
@@ -31,7 +31,7 @@ const MatchParty: React.FC = () => {
 
             <div className="mb-80">
                 <section
-                    className={`flex w-930 flex-col items-center rounded-cool border border-light-grey bg-white bg-opacity-90 px-100 py-77 text-center shadow-custom-light backdrop-blur`}
+                    className={`flex w-full flex-col items-center rounded-cool border border-light-grey bg-white bg-opacity-90 px-6 py-77 text-center shadow-custom-light backdrop-blur md:w-930 md:px-100`}
                 >
                     <img
                         src={userMatchParty?.logo}

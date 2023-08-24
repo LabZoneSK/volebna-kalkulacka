@@ -22,20 +22,22 @@ const ButtonsRow = () => {
     }
 
     return (
-        <section className="my-50 flex justify-center gap-80">
+        <section className="my-50 flex flex-col justify-center gap-20 md:flex-row md:gap-80">
             <Button
                 handleClick={resetApp}
                 label="Spustiť kalkulačku znova"
                 type={ButtonType.SECONDARY}
                 icon={<Chevron className="text-magenta" />}
             />
-            <Button
-                handleClick={() => shareResults()}
-                label="Zdieľaj svoj výsledok"
-                type={ButtonType.SECONDARY}
-                color="z-blue"
-                icon={<Share />}
-            />
+            <div className="hidden">
+                <Button
+                    handleClick={() => shareResults()}
+                    label="Zdieľaj svoj výsledok"
+                    type={ButtonType.SECONDARY}
+                    color="z-blue"
+                    icon={<Share />}
+                />
+            </div>
         </section>
     )
 }

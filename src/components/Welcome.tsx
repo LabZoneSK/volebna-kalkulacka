@@ -12,7 +12,7 @@ const Welcome = () => {
     return (
         <div className="mx-auto w-full md:w-930">
             <section className="flex w-full flex-col-reverse items-center md:flex-row">
-                <h1 className="w-2/3 font-poppins text-50 font-bold md:w-1/2">
+                <h1 className="mb-6 w-2/3 text-center font-poppins text-3xl font-bold leading-normal md:mb-0 md:w-1/2 md:text-left md:text-50">
                     Zisti, koho voliť podľa{' '}
                     <span className="text-magenta">tvojich hodnôt</span>!
                 </h1>
@@ -23,7 +23,7 @@ const Welcome = () => {
                 />
             </section>
 
-            <section className="rounded-cool border border-light-grey px-100 py-77 text-center shadow-custom-light backdrop-blur">
+            <section className="rounded-cool border border-light-grey px-6 py-77 text-center shadow-custom-light backdrop-blur md:px-100">
                 <h2 className="mb-10 text-center font-poppins text-34 font-bold uppercase text-magenta">
                     Nevyberaj ľudí, voľ hodnoty!
                 </h2>

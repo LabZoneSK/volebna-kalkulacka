@@ -19,11 +19,11 @@ const AllParties = () => {
 
     return (
         <div className="mx-auto overflow-hidden">
-            <section className="mb-62 mt-62 flex w-full flex-row items-center">
-                <h1 className="w-1/2 grow text-left font-poppins text-40 font-bold">
+            <section className="mb-6 mt-62 flex w-full flex-col items-start md:mb-62 md:flex-row md:items-center">
+                <h1 className="w-full grow text-left font-poppins text-3xl font-bold md:w-1/2 md:text-40">
                     Porovnanie so všetkými stranami
                 </h1>
-                <div className="text-right">
+                <div className="mt-4 text-right md:mt-0">
                     <a
                         className="flex items-center gap-10 font-poppins text-18"
                         onClick={() => setPreviousStep()}
@@ -33,17 +33,17 @@ const AllParties = () => {
                     </a>
                 </div>
             </section>
-            <section className="overflow-x-scroll">
-                <table className="table-fixed border-separate border-spacing-0">
+            <section className="absolute left-0 w-[100vw] overflow-x-scroll">
+                <table className="border-separate border-spacing-0">
                     <thead>
                         <tr className="border-b">
-                            <th className="sticky left-0 z-10 min-w-[550px] border-r border-r bg-white" />
-                            <th className="sticky left-[550px] min-w-[170px] bg-white px-10 py-30 font-poppins text-18 font-bold">
+                            <th className="min-w-[550px] border-r border-r bg-white" />
+                            <th className="min-w-[170px] bg-white px-10 font-poppins text-18 font-bold md:py-30">
                                 Tvoja odpoveď
                             </th>
                             {parties.map((party, i) => (
                                 <th
-                                    className="min-w-[170px] border-l px-10 py-30"
+                                    className="min-w-[170px] border-l px-10 md:py-30"
                                     key={i}
                                 >
                                     <img
@@ -68,7 +68,7 @@ const AllParties = () => {
                                 >
                                     <td
                                         className={
-                                            'sticky left-0 bg-white py-30 pr-100' +
+                                            'bg-white py-30 pr-100' +
                                             (index % 2 === 0
                                                 ? ''
                                                 : ' bg-z-row font-bold')
@@ -85,7 +85,7 @@ const AllParties = () => {
                                     </td>
                                     <td
                                         className={classNames(
-                                            'sticky left-[550px] w-[170px] border-l border-r px-30 text-center',
+                                            'w-[170px] border-l border-r px-30 text-center',
                                             {
                                                 'bg-white': index % 2 === 0,
                                                 'bg-z-row': index % 2 !== 0,
@@ -121,9 +121,8 @@ const AllParties = () => {
                         })}
                     </tbody>
                 </table>
+                <ButtonsRow />
             </section>
-
-            <ButtonsRow />
         </div>
     )
 }

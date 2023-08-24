@@ -45,8 +45,8 @@ const UserAnswers: React.FC<UserAnswersProps> = ({ questions }) => {
     return (
         <div>
             <form onSubmit={(e) => e.preventDefault()}>
-                <div className="flex w-full gap-20 px-50">
-                    <div className="flex w-[190px] ">
+                <div className="flex w-full flex-col gap-6 px-50 md:flex-row md:gap-20">
+                    <div className="selft-center flex w-[190px]">
                         <span className="mr-2 font-poppins text-50 font-bold text-magenta">
                             {currentQuestion + 1}
                         </span>
@@ -67,7 +67,7 @@ const UserAnswers: React.FC<UserAnswersProps> = ({ questions }) => {
                             </div>
                         )}
 
-                        <div className="mb-50 flex gap-70">
+                        <div className="mb-50 flex flex-col gap-12 md:flex-row md:gap-70">
                             <AnswerButton
                                 onClick={() => handleResponse(1)}
                                 type={AnswerButtonType.YES}
@@ -95,7 +95,7 @@ const UserAnswers: React.FC<UserAnswersProps> = ({ questions }) => {
                                 setImportantQuestions([...importantQuestions])
                             }}
                         >
-                            <div className="flex flex-row gap-20">
+                            <div className="flex flex-col items-center gap-20 md:flex-row">
                                 {importantQuestions[currentQuestion] ? (
                                     <StarFull className="w-[24px]" />
                                 ) : (
@@ -112,7 +112,7 @@ const UserAnswers: React.FC<UserAnswersProps> = ({ questions }) => {
                             className="font-poppins text-18"
                             onClick={() => handleResponse(0)}
                         >
-                            <div className="flex flex-row gap-20">
+                            <div className="flex flex-col-reverse items-center gap-20 md:flex-row">
                                 <span className="font-poppins text-18">
                                     Nie je to pre mňa dôležité, preskočiť
                                 </span>
