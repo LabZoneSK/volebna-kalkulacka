@@ -84,7 +84,7 @@ const fetchAirtable = async (path) => {
 
 const app = express()
 
-const PORT = 3001
+const PORT = process.env.SERVER_PORT || 3001
 
 // Add CORS headers
 app.use((_req, res, next) => {
