@@ -23,7 +23,7 @@ const Welcome = () => {
                 />
             </section>
 
-            <section className="rounded-cool border border-light-grey px-6 py-77 text-center shadow-custom-light backdrop-blur md:px-100">
+            <section className="rounded-cool border border-light-grey bg-white px-6 py-77 text-center shadow-custom-light backdrop-blur md:px-100">
                 <h2 className="mb-10 text-center font-poppins text-34 font-bold uppercase text-magenta">
                     Nevyberaj ľudí, voľ hodnoty!
                 </h2>

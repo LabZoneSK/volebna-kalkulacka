@@ -50,7 +50,7 @@ const AllParties = () => {
                 ref={scrollRef}
             >
                 <table className="border-separate border-spacing-0">
-                    <thead>
+                    <thead className="bg-white">
                         <tr className="border-b">
                             <th className="min-w-[550px] border-r border-r bg-white" />
                             <th className="min-w-[170px] bg-white px-10 font-poppins text-18 font-bold md:py-30">
@@ -77,7 +77,7 @@ const AllParties = () => {
                                 <tr
                                     className={
                                         index % 2 === 0
-                                            ? ''
+                                            ? 'bg-white'
                                             : 'bg-z-row font-bold'
                                     }
                                 >

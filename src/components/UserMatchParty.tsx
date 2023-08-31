@@ -34,7 +34,7 @@ const UserMatchParty = () => {
             </section>
             <section>
                 <table className="w-full md:w-930">
-                    <thead>
+                    <thead className="bg-white">
                         <tr className="border-b">
                             <th className="border-r" />
                             <th className="px-10 py-30 font-poppins text-18 font-bold">
@@ -54,7 +54,9 @@ const UserMatchParty = () => {
                         {questions.map((question, index) => (
                             <tr
                                 className={
-                                    index % 2 === 0 ? '' : 'bg-z-row font-bold'
+                                    index % 2 === 0
+                                        ? 'bg-white'
+                                        : 'bg-z-row font-bold'
                                 }
                             >
                                 <td className="border-r py-30 md:pr-100">
