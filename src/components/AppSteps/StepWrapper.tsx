@@ -8,6 +8,7 @@ import {
 } from '../AnswersForm/answers.form.atoms'
 import { useAtom, useAtomValue } from 'jotai'
 import ChevronMagenta from '../../assets/chevron-magenta.svg'
+import { titleAtom } from '../../atoms/common.atoms'
 
 interface StepWrapperProps {
     children: React.ReactNode
@@ -19,6 +20,7 @@ const StepWrapper: React.FC<StepWrapperProps> = ({ children }) => {
     const questions = useAtomValue(questionsAtom)
     const [, nextQuestion] = useAtom(nextQuestionAtom)
     const [, previousQuestion] = useAtom(previousQuestionAtom)
+    const title = useAtomValue(titleAtom)
 
     const wrapperPadding = questionsFormActive
         ? 'pt-100 px-0'
@@ -32,7 +34,7 @@ const StepWrapper: React.FC<StepWrapperProps> = ({ children }) => {
         <div className="mx-auto">
             <section className="mb-62 mt-62 w-full">
                 <h1 className="text-center font-poppins text-40 font-bold">
-                    Volebná kalkulačka
+                    {title}
                 </h1>
             </section>
 

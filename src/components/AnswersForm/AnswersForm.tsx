@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { UserAnswersProps } from '../../@types'
 import {
     currentQuestionAtom,
@@ -16,6 +16,8 @@ import { ReactComponent as StarFull } from '../../assets/star_full.svg'
 import Thumb from '../../assets/thumb.svg'
 import ReactMarkdown from 'react-markdown'
 import { useMatchingLogic } from './useMatchingLogic'
+import { titleAtom } from '../../atoms/common.atoms'
+import Button from '../common/Button'
 
 const UserAnswers: React.FC<UserAnswersProps> = ({ questions }) => {
     const answers = useAtomValue(answersAtom)
@@ -23,14 +25,24 @@ const UserAnswers: React.FC<UserAnswersProps> = ({ questions }) => {
     const [, nextQuestion] = useAtom(nextQuestionAtom)
     const setQuestionsActive = useSetAtom(questionsFormActiveAtom)
     const nextStep = useSetAtom(nextStepAtom)
+    const setTitle = useSetAtom(titleAtom)
 
     const { submitAnswers } = useMatchingLogic()
+
+    // Set true if current step is half of all questions
+    const [showGift, setShowGift] = React.useState<boolean>(false)
 
     const [importantQuestions, setImportantQuestions] = React.useState<
         boolean[]
     >(new Array(questions.length).fill(false))
 
     setQuestionsActive(true)
+
+    useEffect(() => {
+        if (currentQuestion === Math.floor(questions.length / 2)) {
+            setShowGift(true)
+        }
+    }, [currentQuestion, questions.length])
 
     const handleResponse = (value: number) => {
         answers[currentQuestion] = value
@@ -42,6 +54,26 @@ const UserAnswers: React.FC<UserAnswersProps> = ({ questions }) => {
         nextQuestion()
     }
 
+    if (showGift) {
+        setTitle('Ide ti to super, už si v polovici!')
+
+        return (
+            <div className="relative">
+                <img
+                    className="-mt-100 w-full rounded-cool"
+                    src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaXRobTJzZWdvbTNsbmVkY2E4Mjh1MGd3OXgwcnBpeXo4M3czbmFhZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0MYt5jPR6QX5pnqM/giphy.gif"
+                />
+                <div className="absolute inset-x-0 bottom-30">
+                    <Button
+                        handleClick={() => setShowGift(false)}
+                        label="Poďme ďalej"
+                    />
+                </div>
+            </div>
+        )
+    }
+
+    setTitle('Volebná kalkulačka')
     return (
         <div>
             <form onSubmit={(e) => e.preventDefault()}>

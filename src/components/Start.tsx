@@ -14,7 +14,7 @@ const Start = () => {
             <p className="mb-62 font-poppins">
                 <b>Odporúčame ti túto stranu ďalej sledovať</b> v diskusiách,
                 prečítať si jej program a presvedčiť sa, že si s touto voľbou
-                naozajn stotožnený/á.
+                naozaj stotožnený/á.
             </p>
 
             <Button
