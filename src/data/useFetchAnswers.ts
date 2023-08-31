@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react'
-import { fetchAirtable } from './fetchAirtable'
-import { transformResponseToPoliticalParties } from '../helpers/transformers'
 import { useAtom } from 'jotai'
 import { partiesAtom } from '../components/AnswersForm/answers.form.atoms'
+import axios from 'axios'
 
 const useFetchAnswers = () => {
     const [parties, setParties] = useAtom(partiesAtom)
@@ -10,20 +9,15 @@ const useFetchAnswers = () => {
 
     useEffect(() => {
         const fetchAnswers = async () => {
-            // Use only the path to the API endpoint
-            const result = await fetchAirtable(
-                'tblZ2ct746fdfB39Z?view=viwiYe2EgZLwhKsbX'
+            const answers = await axios.get(
+                'http://zmudri.labzone.tech/answers'
             )
-            // Transform the response to the desired format
-            const transformedResult =
-                transformResponseToPoliticalParties(result)
-
-            setParties(transformedResult)
             setLoading(false)
+            setParties(answers.data)
         }
 
         fetchAnswers()
-    }, [])
+    }, [setParties])
 
     return { loading, parties }
 }
