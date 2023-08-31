@@ -15,7 +15,7 @@ const useFetchQuestions = () => {
     useEffect(() => {
         const fetchQuestions = async () => {
             const result = await axios.get(
-                'http://zmudri.labzone.tech/questions'
+                'https://zmudri.labzone.tech/questions'
             )
 
             setQuestions(result.data)

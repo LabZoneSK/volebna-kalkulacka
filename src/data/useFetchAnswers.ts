@@ -10,7 +10,7 @@ const useFetchAnswers = () => {
     useEffect(() => {
         const fetchAnswers = async () => {
             const answers = await axios.get(
-                'http://zmudri.labzone.tech/answers'
+                'https://zmudri.labzone.tech/answers'
             )
             setLoading(false)
             setParties(answers.data)
