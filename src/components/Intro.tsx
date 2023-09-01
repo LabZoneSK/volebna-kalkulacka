@@ -14,7 +14,7 @@ const Intro = () => {
                 Odpovedať môžeš <b>Áno, Nie</b>, otázku označiť za{' '}
                 <b>Dôležitú</b> alebo ju <b>Preskočiť</b>.<br />
                 Vtedy tému vyhodnotíme ako pre teba nepodstatnú a vôbec ju
-                nezarátame do výsledku
+                nezarátame do výsledku.
             </p>
 
             <Button
