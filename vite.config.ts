@@ -1,3 +1,4 @@
+import { sentryVitePlugin } from "@sentry/vite-plugin";
 /// <reference types="vitest" />
 /// <reference types="vite/client" />
 
@@ -10,7 +11,10 @@ export default defineConfig({
   server: {
     port: 3000,
   },
-  plugins: [react(), svgr()],
+  plugins: [react(), svgr(), sentryVitePlugin({
+    org: "labzone",
+    project: "volebna-kalkulacka"
+  })],
   test: {
     globals: true,
     environment: "jsdom",
