@@ -10,7 +10,6 @@ import { prevStepAtom } from './AppSteps/stepper.atoms'
 import AnswerTag from './AnswersForm/AnswerTag'
 import { ReactComponent as Chevron } from '../assets/chevron.svg'
 import ButtonsRow from './common/ButtonsRow'
-import { useDrag } from 'react-use-gesture'
 
 const AllParties = () => {
     const questions = useAtomValue(questionsAtom)
@@ -18,15 +17,6 @@ const AllParties = () => {
 
     const answers = useAtomValue(answersAtom)
     const parties = useAtomValue(partiesAtom)
-
-    const scrollRef = useRef<HTMLElement | null>(null)
-
-    const bind = useDrag(({ movement: [mx], lastOffset: [ox] }) => {
-        const el = scrollRef.current
-        if (el) {
-            el.scrollLeft = ox - mx
-        }
-    })
 
     return (
         <div className="mx-auto overflow-hidden">
@@ -44,11 +34,7 @@ const AllParties = () => {
                     </a>
                 </div>
             </section>
-            <section
-                className="absolute left-0 w-full overflow-x-scroll"
-                {...bind()}
-                ref={scrollRef}
-            >
+            <section className="absolute left-0 w-full overflow-x-scroll">
                 <table className="border-separate border-spacing-0">
                     <thead className="bg-white">
                         <tr className="border-b">
