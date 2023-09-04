@@ -70,7 +70,7 @@ const AnswerRow: React.FC<AnswerRowProps> = ({
     }
 
     return (
-        <div className="relative grid w-full grid-cols-1 items-center rounded-cool border border-light-grey bg-white md:grid-cols-[75px_1fr_140px]">
+        <div className="relative grid w-full grid-cols-1 grid-rows-1 items-center rounded-cool border border-light-grey bg-white md:grid-cols-[75px_1fr_140px]">
             <div className="mt-6 flex h-full flex-col items-center justify-center border-r md:mt-0">
                 <button onClick={() => changeImportanceOfQuestion(question)}>
                     {question.isImportant ? (
