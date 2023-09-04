@@ -1,4 +1,3 @@
-import { useRef } from 'react'
 import { useSetAtom, useAtomValue } from 'jotai'
 import classNames from 'classnames'
 import {
