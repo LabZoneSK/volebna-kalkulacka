@@ -10,9 +10,6 @@ const Calculator: React.FC = () => {
     const { loading, questions } = useFetchQuestions()
     const { parties } = useFetchAnswers()
 
-    console.log('questions', questions)
-    console.log('parties', parties)
-
     return (
         <StepWrapper>
             {loading ? (

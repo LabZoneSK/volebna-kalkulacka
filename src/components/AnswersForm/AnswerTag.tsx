@@ -18,7 +18,6 @@ const AnswerTag: React.FC<AnswerTagProps> = ({ answer, currentParty }) => {
         }
     )
 
-    console.log(currentParty)
     if (!currentParty?.explanation)
         return (
             <div className={TagClass}>

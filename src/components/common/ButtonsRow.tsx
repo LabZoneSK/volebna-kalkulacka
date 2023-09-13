@@ -17,7 +17,6 @@ const ButtonsRow = () => {
     }, [setCurrentQuestion, setStep])
 
     const shareResults = () => {
-        console.log('share results')
         //TODO: share results
     }
 

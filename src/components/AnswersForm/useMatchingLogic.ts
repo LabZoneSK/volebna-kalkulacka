@@ -6,6 +6,7 @@ import {
     answersAtom,
 } from './answers.form.atoms'
 import { useAtomValue, useSetAtom } from 'jotai'
+import * as Sentry from '@sentry/react'
 
 export const useMatchingLogic = () => {
     const questions = useAtomValue(questionsAtom)
@@ -62,9 +63,19 @@ export const useMatchingLogic = () => {
             }
         })
 
-        const bestMatchParty = distances.reduce((prev, current) => {
-            return prev.compliance > current.compliance ? prev : current
-        })
+        const bestMatchParty =
+            distances.length > 0
+                ? distances.reduce((prev, current) => {
+                      return prev.compliance > current.compliance
+                          ? prev
+                          : current
+                  }, distances[0])
+                : null
+
+        if (!bestMatchParty) {
+            Sentry.captureException(new Error('No best match party found'))
+            return
+        }
 
         const matches = questions
             .filter(
