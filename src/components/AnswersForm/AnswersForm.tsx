@@ -74,6 +74,11 @@ const UserAnswers: React.FC<UserAnswersProps> = ({ questions }) => {
     }
 
     setTitle('Volebná kalkulačka')
+
+    if (!questions[currentQuestion]) {
+        return null
+    }
+
     return (
         <div>
             <form onSubmit={(e) => e.preventDefault()}>
@@ -88,7 +93,7 @@ const UserAnswers: React.FC<UserAnswersProps> = ({ questions }) => {
                     </div>
                     <div className="text-left">
                         <p className="mb-30 text-left font-poppins text-26 font-bold">
-                            {questions[currentQuestion].text}
+                            {questions[currentQuestion]?.text}
                         </p>
 
                         {questions[currentQuestion].description && (
