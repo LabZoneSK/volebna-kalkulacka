@@ -1,14 +1,18 @@
 import { useAtom } from 'jotai'
+import { lazy, Suspense } from 'react'
 import { currentStepAtom } from './stepper.atoms'
-import Welcome from '../Welcome'
-import Intro from '../Intro'
-import Start from '../Start'
-import Calculator from '../Calculator'
-import Summary from '../Summary'
-import MatchParty from '../MatchParty'
-import UserMatchParty from '../UserMatchParty'
-import AllParties from '../AllParties'
 
+/** Components */
+const Welcome = lazy(() => import('../Welcome'))
+const Intro = lazy(() => import('../Intro'))
+const Start = lazy(() => import('../Start'))
+const Calculator = lazy(() => import('../Calculator'))
+const Summary = lazy(() => import('../Summary'))
+const MatchParty = lazy(() => import('../MatchParty'))
+const UserMatchParty = lazy(() => import('../UserMatchParty'))
+const AllParties = lazy(() => import('../AllParties'))
+
+const Loading = () => <div>Loading...</div>
 const AppStepsWrapper = () => {
     const [currentStep] = useAtom(currentStepAtom) // Use the currentStep atom
 
@@ -24,9 +28,11 @@ const AppStepsWrapper = () => {
     ]
 
     return (
-        <div className="mx-auto w-full px-3 md:w-960 md:px-0">
-            {steps[currentStep]}
-        </div>
+        <Suspense fallback={<Loading />}>
+            <div className="mx-auto w-full px-3 md:w-960 md:px-0">
+                {steps[currentStep]}
+            </div>
+        </Suspense>
     )
 }
 

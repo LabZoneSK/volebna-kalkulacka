@@ -1,15 +1,18 @@
-import React from 'react'
+import { FC, lazy } from 'react'
 import classNames from 'classnames'
 
 import { getResponseText } from '../../helpers/answers'
-import { Tooltip } from '@material-tailwind/react'
 import { Answer } from '../../@types'
+
+const Tooltip = lazy(
+    () => import('@material-tailwind/react/components/Tooltip')
+)
 interface AnswerTagProps {
     answer: number
     currentParty?: Answer
 }
 
-const AnswerTag: React.FC<AnswerTagProps> = ({ answer, currentParty }) => {
+const AnswerTag: FC<AnswerTagProps> = ({ answer, currentParty }) => {
     const TagClass = classNames(
         'flex gap-20 items-center justify-center rounded-full py-10 text-center font-bold font-poppins',
         {
