@@ -1,16 +1,16 @@
 import { useAtom } from 'jotai'
-import { lazy, Suspense } from 'react'
+import { Suspense } from 'react'
 import { currentStepAtom } from './stepper.atoms'
 
 /** Components */
-const Welcome = lazy(() => import('../Welcome'))
-const Intro = lazy(() => import('../Intro'))
-const Start = lazy(() => import('../Start'))
-const Calculator = lazy(() => import('../Calculator'))
-const Summary = lazy(() => import('../Summary'))
-const MatchParty = lazy(() => import('../MatchParty'))
-const UserMatchParty = lazy(() => import('../UserMatchParty'))
-const AllParties = lazy(() => import('../AllParties'))
+import Welcome from '../Welcome'
+import Intro from '../Intro'
+import Start from '../Start'
+import Calculator from '../Calculator'
+import Summary from '../Summary'
+import MatchParty from '../MatchParty'
+import UserMatchParty from '../UserMatchParty'
+import AllParties from '../AllParties'
 
 const Loading = () => <div>Loading...</div>
 const AppStepsWrapper = () => {
