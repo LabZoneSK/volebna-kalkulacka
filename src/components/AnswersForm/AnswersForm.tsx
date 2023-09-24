@@ -83,28 +83,28 @@ const UserAnswers: React.FC<UserAnswersProps> = ({ questions }) => {
         <div>
             <form onSubmit={(e) => e.preventDefault()}>
                 <div className="flex w-full flex-col gap-6 px-50 md:flex-row md:gap-20">
-                    <div className="selft-center flex w-[190px]">
-                        <span className="mr-2 font-poppins text-50 font-bold text-magenta">
+                    <div className="flex w-[190px] self-end md:self-start">
+                        <span className="mr-2 font-poppins text-4xl font-bold text-magenta md:text-6xl">
                             {currentQuestion + 1}
                         </span>
-                        <span className="text-20 mt-3 font-poppins">
+                        <span className="text-20 mt-3 w-[40px] font-poppins">
                             / {questions.length}
                         </span>
                     </div>
                     <div className="text-left">
-                        <p className="mb-30 text-left font-poppins text-26 font-bold">
+                        <p className="dm:mb-30 mb-20 text-left font-poppins text-xl font-bold md:text-26">
                             {questions[currentQuestion]?.text}
                         </p>
 
                         {questions[currentQuestion].description && (
-                            <div className="markdown-content mb-50 font-poppins">
+                            <div className="markdown-content mb-30 font-poppins text-sm md:mb-50 md:text-base">
                                 <ReactMarkdown linkTarget="_blank">
                                     {questions[currentQuestion].description}
                                 </ReactMarkdown>
                             </div>
                         )}
 
-                        <div className="mb-50 flex flex-col gap-12 md:flex-row md:gap-70">
+                        <div className="mb-20 flex flex-col gap-8 md:mb-50 md:flex-row md:gap-12 md:gap-70">
                             <AnswerButton
                                 onClick={() => handleResponse(1)}
                                 type={AnswerButtonType.YES}
@@ -132,13 +132,13 @@ const UserAnswers: React.FC<UserAnswersProps> = ({ questions }) => {
                                 setImportantQuestions([...importantQuestions])
                             }}
                         >
-                            <div className="flex flex-col items-center gap-20 md:flex-row">
+                            <div className="flex flex-col items-center gap-10 md:flex-row md:gap-20">
                                 {importantQuestions[currentQuestion] ? (
                                     <StarFull className="w-[24px]" />
                                 ) : (
                                     <Star className="w-[24px]" />
                                 )}
-                                <span className="select-none select-none font-poppins text-18">
+                                <span className="select-none select-none font-poppins text-sm md:text-18">
                                     Je to pre mňa dôležité
                                 </span>
                             </div>
@@ -149,8 +149,8 @@ const UserAnswers: React.FC<UserAnswersProps> = ({ questions }) => {
                             className="font-poppins text-18"
                             onClick={() => handleResponse(0)}
                         >
-                            <div className="flex flex-col-reverse items-center gap-20 md:flex-row">
-                                <span className="font-poppins text-18">
+                            <div className="flex flex-col-reverse items-center gap-10 md:flex-row md:gap-20">
+                                <span className="font-poppins text-sm md:text-18">
                                     Nie je to pre mňa dôležité, preskočiť
                                 </span>
                                 <img
