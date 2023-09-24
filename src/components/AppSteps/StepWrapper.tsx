@@ -70,7 +70,7 @@ const StepWrapper: React.FC<StepWrapperProps> = ({ children }) => {
                     </section>
                 )}
                 {showChevronNext && (
-                    <section className="md:gap-930 absolute top-[250px] flex w-full md:w-960">
+                    <section className="md:gap-930 absolute top-[260px] flex w-full md:w-960">
                         <div className="absolute right-20 text-right md:-right-20">
                             <button onClick={() => nextQuestion()}>
                                 <img
