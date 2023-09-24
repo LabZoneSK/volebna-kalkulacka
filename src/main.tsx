@@ -1,4 +1,3 @@
-import React from 'react'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
@@ -23,11 +22,7 @@ Sentry.init({
 const rootElement = document.getElementById('root')
 if (rootElement) {
     const root = createRoot(rootElement)
-    root.render(
-        (
-            <StrictMode>{(<App />) as React.ReactElement}</StrictMode>
-        ) as React.ReactElement
-    )
+    root.render((<StrictMode>{(<App />) as any}</StrictMode>) as any)
 } else {
     console.error('Could not find root element')
 }
