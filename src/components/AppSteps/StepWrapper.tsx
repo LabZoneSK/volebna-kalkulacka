@@ -23,7 +23,7 @@ const StepWrapper: React.FC<StepWrapperProps> = ({ children }) => {
     const title = useAtomValue(titleAtom)
 
     const wrapperPadding = questionsFormActive
-        ? 'pt-100 px-0'
+        ? 'pt-20 md:pt-100 px-0'
         : 'py-12 md:py-77 px-8 md:px-100'
 
     const showChevronNext =
@@ -32,7 +32,7 @@ const StepWrapper: React.FC<StepWrapperProps> = ({ children }) => {
 
     return (
         <div className="mx-auto">
-            <section className="mb-62 mt-62 w-full">
+            <section className="mb-30 mt-62 w-full md:mb-62">
                 <h1 className="text-center font-poppins text-40 font-bold">
                     {title}
                 </h1>
@@ -57,20 +57,24 @@ const StepWrapper: React.FC<StepWrapperProps> = ({ children }) => {
                     {children}
                 </section>
                 {showChevronPrevious && (
-                    <section className="gap-930 absolute top-200 flex w-full md:w-960">
-                        <div className="absolute -left-50 text-left">
+                    <section className="md:gap-930 absolute top-[260px] flex w-full md:w-960">
+                        <div className="absolute left-10 text-left md:-left-50">
                             <button onClick={() => previousQuestion()}>
-                                <img src={ChevronMagenta} alt="Back" />
+                                <img
+                                    src={ChevronMagenta}
+                                    className="h-30 md:h-50"
+                                    alt="Back"
+                                />
                             </button>
                         </div>
                     </section>
                 )}
                 {showChevronNext && (
-                    <section className="gap-930 absolute top-200 flex w-960">
-                        <div className="absolute -right-20 text-right">
+                    <section className="md:gap-930 absolute top-[250px] flex w-full md:w-960">
+                        <div className="absolute right-20 text-right md:-right-20">
                             <button onClick={() => nextQuestion()}>
                                 <img
-                                    className="rotate-180"
+                                    className="h-30 rotate-180 md:h-50"
                                     src={ChevronMagenta}
                                     alt="Next"
                                 />

@@ -14,7 +14,7 @@ interface AnswerTagProps {
 
 const AnswerTag: FC<AnswerTagProps> = ({ answer, currentParty }) => {
     const TagClass = classNames(
-        'flex gap-20 items-center justify-center rounded-full py-10 text-center font-bold font-poppins',
+        'flex gap-20 items-center justify-center rounded-full py-10 text-center font-bold font-poppins w-[90px]',
         {
             'bg-magenta text-white': answer === 1,
             'bg-z-blue text-white': answer === -1,
